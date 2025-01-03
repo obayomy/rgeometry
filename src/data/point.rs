@@ -1,4 +1,5 @@
 use array_init::{array_init, try_array_init};
+use float::FloatCore;
 use num_bigint::BigInt;
 use num_rational::BigRational;
 use num_traits::*;
@@ -16,7 +17,8 @@ use std::ops::Index;
 use super::{Direction, Vector};
 use crate::{Orientation, PolygonScalar, TotalOrd};
 
-#[derive(Debug, Clone, Copy)]
+#[allow(clippy::derived_hash_with_manual_eq)]
+#[derive(Debug, Clone, Copy, Hash)]
 #[repr(transparent)] // Required for correctness!
 pub struct Point<T, const N: usize = 2> {
   pub array: [T; N],
@@ -43,7 +45,7 @@ impl<T: TotalOrd, const N: usize> Eq for Point<T, N> {}
 
 impl<T: TotalOrd, const N: usize> PartialOrd for Point<T, N> {
   fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-    Some(self.total_cmp(other))
+    Some(std::cmp::Ord::cmp(self, other))
   }
 }
 
@@ -59,26 +61,26 @@ pub struct PointSoS<'a, T, const N: usize = 2> {
   pub point: &'a Point<T, N>,
 }
 
-impl<'a, T: TotalOrd, const N: usize> TotalOrd for PointSoS<'a, T, N> {
+impl<T: TotalOrd, const N: usize> TotalOrd for PointSoS<'_, T, N> {
   fn total_cmp(&self, other: &Self) -> Ordering {
     (self.index, self.point).total_cmp(&(other.index, other.point))
   }
 }
 
-impl<'a, T: TotalOrd, const N: usize> PartialEq for PointSoS<'a, T, N> {
+impl<T: TotalOrd, const N: usize> PartialEq for PointSoS<'_, T, N> {
   fn eq(&self, other: &Self) -> bool {
     self.total_cmp(other).is_eq()
   }
 }
-impl<'a, T: TotalOrd, const N: usize> Eq for PointSoS<'a, T, N> {}
+impl<T: TotalOrd, const N: usize> Eq for PointSoS<'_, T, N> {}
 
-impl<'a, T: TotalOrd, const N: usize> PartialOrd for PointSoS<'a, T, N> {
+impl<T: TotalOrd, const N: usize> PartialOrd for PointSoS<'_, T, N> {
   fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
-    Some(self.total_cmp(other))
+    Some(std::cmp::Ord::cmp(self, other))
   }
 }
 
-impl<'a, T: TotalOrd, const N: usize> Ord for PointSoS<'a, T, N> {
+impl<T: TotalOrd, const N: usize> Ord for PointSoS<'_, T, N> {
   fn cmp(&self, other: &Self) -> Ordering {
     self.total_cmp(other)
   }
@@ -108,7 +110,7 @@ impl<T, const N: usize> Point<T, N> {
   /// Panics if any of the inputs are NaN.
   pub fn new_nn(array: [T; N]) -> Point<NotNan<T>, N>
   where
-    T: Float,
+    T: FloatCore,
   {
     Point::new(array_init(|i| NotNan::new(array[i]).unwrap()))
   }
@@ -204,7 +206,7 @@ impl From<Point<i64, 2>> for Point<BigInt, 2> {
   }
 }
 
-impl<'a, const N: usize> From<&'a Point<BigRational, N>> for Point<f64, N> {
+impl<const N: usize> From<&Point<BigRational, N>> for Point<f64, N> {
   fn from(point: &Point<BigRational, N>) -> Point<f64, N> {
     Point {
       array: array_init(|i| point.array[i].to_f64().unwrap()),
@@ -220,7 +222,7 @@ impl<const N: usize> From<Point<BigRational, N>> for Point<f64, N> {
   }
 }
 
-impl<'a, const N: usize> From<&'a Point<f64, N>> for Point<BigRational, N> {
+impl<const N: usize> From<&Point<f64, N>> for Point<BigRational, N> {
   fn from(point: &Point<f64, N>) -> Point<BigRational, N> {
     Point {
       array: array_init(|i| BigRational::from_f64(point.array[i]).unwrap()),

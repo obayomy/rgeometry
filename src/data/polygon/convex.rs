@@ -11,7 +11,7 @@ use crate::{Error, Orientation, PolygonScalar, TotalOrd};
 
 use super::Polygon;
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Hash)]
 pub struct PolygonConvex<T>(Polygon<T>);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -95,21 +95,21 @@ where
   /// # Time complexity
   /// $O(n \log n)$
   ///
-  /// # Examples
-  /// ```no_run
-  /// # use rgeometry_wasm::playground::*;
-  /// # use rgeometry::data::*;
-  /// # clear_screen();
-  /// # set_viewport(2.0, 2.0);
-  /// # let convex: PolygonConvex<i8> = {
-  /// PolygonConvex::random(3, &mut rand::thread_rng())
-  /// # };
-  /// # render_polygon(&convex.float().normalize());
-  /// ```
-  /// <iframe src="https://web.rgeometry.org/wasm/gist/9abc54a5e2e3d33e3dd1785a71e812d2"></iframe>
+  // # Examples
+  // ```no_run
+  // # use rgeometry_wasm::playground::*;
+  // # use rgeometry::data::*;
+  // # clear_screen();
+  // # set_viewport(2.0, 2.0);
+  // # let convex: PolygonConvex<i8> = {
+  // PolygonConvex::random(3, &mut rand::thread_rng())
+  // # };
+  // # render_polygon(&convex.float().normalize());
+  // ```
+  // <iframe src="https://web.rgeometry.org/wasm/gist/9abc54a5e2e3d33e3dd1785a71e812d2"></iframe>
   pub fn random<R>(n: usize, rng: &mut R) -> PolygonConvex<T>
   where
-    T: Bounded + PolygonScalar + SampleUniform + Copy,
+    T: Bounded + PolygonScalar + SampleUniform,
     R: Rng + ?Sized,
   {
     let n = n.max(3);
@@ -123,7 +123,7 @@ where
         .into_iter()
         .scan(Point::zero(), |st, vec| {
           *st += vec;
-          Some(*st)
+          Some((*st).clone())
         })
         .collect();
       let n_vertices = (*vertices).len();
@@ -181,7 +181,7 @@ impl Distribution<PolygonConvex<isize>> for Standard {
 // Property: random_between(n, max, &mut rng).sum::<usize>() == max
 fn random_between_iter<T, R>(n: usize, rng: &mut R) -> impl Iterator<Item = T>
 where
-  T: PolygonScalar + Bounded + SampleUniform + Copy,
+  T: PolygonScalar + Bounded + SampleUniform,
   R: Rng + ?Sized,
 {
   let zero: T = T::from_constant(0);
@@ -189,12 +189,12 @@ where
   assert!(n > 0);
   let mut pts = Vec::with_capacity(n);
   while pts.len() < n - 1 {
-    pts.push(rng.gen_range(zero..max));
+    pts.push(rng.gen_range(zero.clone()..max.clone()));
   }
   pts.sort_unstable_by(TotalOrd::total_cmp);
   pts.push(max);
   pts.into_iter().scan(zero, |from, x| {
-    let out = x - *from;
+    let out = x.clone() - (*from).clone();
     *from = x;
     Some(out)
   })
@@ -203,7 +203,7 @@ where
 // Property: random_between_zero(10, 100, &mut rng).iter().sum::<isize>() == 0
 fn random_between_zero<T, R>(n: usize, rng: &mut R) -> Vec<T>
 where
-  T: Bounded + PolygonScalar + SampleUniform + Copy,
+  T: Bounded + PolygonScalar + SampleUniform,
   R: Rng + ?Sized,
 {
   assert!(n >= 2);
@@ -220,12 +220,12 @@ where
 // Random vectors that sum to zero.
 fn random_vectors<T, R>(n: usize, rng: &mut R) -> Vec<Vector<T, 2>>
 where
-  T: Bounded + PolygonScalar + SampleUniform + Copy,
+  T: Bounded + PolygonScalar + SampleUniform,
   R: Rng + ?Sized,
 {
   random_between_zero(n, rng)
     .into_iter()
-    .zip(random_between_zero(n, rng).into_iter())
+    .zip(random_between_zero(n, rng))
     .map(|(a, b)| Vector([a, b]))
     .collect()
 }
@@ -236,6 +236,8 @@ where
 #[cfg(test)]
 mod tests {
   use super::*;
+  use rand::rngs::SmallRng;
+  use rand::SeedableRng;
 
   use proptest::prelude::*;
   use proptest::proptest as proptest_block;
@@ -275,8 +277,8 @@ mod tests {
     }
 
     #[test]
-    fn sum_to_max(n in 1..1000) {
-      let mut rng = rand::thread_rng();
+    fn sum_to_max(n in 1..1000, seed: u64) {
+      let mut rng = SmallRng::seed_from_u64(seed);
       let vecs = random_between_iter::<i8, _>(n as usize, &mut rng);
       prop_assert_eq!(vecs.sum::<i8>(), i8::MAX);
 
@@ -285,8 +287,8 @@ mod tests {
     }
 
     #[test]
-    fn random_between_zero_properties(n in 2..1000) {
-      let mut rng = rand::thread_rng();
+    fn random_between_zero_properties(n in 2..1000, seed: u64) {
+      let mut rng = SmallRng::seed_from_u64(seed);
       let vecs: Vec<i8> = random_between_zero(n as usize, &mut rng);
       prop_assert_eq!(vecs.iter().sum::<i8>(), 0);
       prop_assert_eq!(vecs.len(), n as usize);
@@ -297,8 +299,8 @@ mod tests {
     }
 
     #[test]
-    fn sum_to_zero_vector(n in 2..1000) {
-      let mut rng = rand::thread_rng();
+    fn sum_to_zero_vector(n in 2..1000, seed: u64) {
+      let mut rng = SmallRng::seed_from_u64(seed);
       let vecs: Vec<Vector<i8, 2>> = random_vectors(n as usize, &mut rng);
       prop_assert_eq!(vecs.into_iter().sum::<Vector<i8, 2>>(), Vector([0, 0]))
     }

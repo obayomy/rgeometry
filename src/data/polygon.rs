@@ -20,7 +20,7 @@ pub use convex::*;
 
 use super::Transform;
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct PositionId(usize);
 
 impl From<PositionId> for usize {
@@ -29,7 +29,7 @@ impl From<PositionId> for usize {
   }
 }
 
-#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct RingId(usize);
 
 impl From<RingId> for usize {
@@ -38,7 +38,7 @@ impl From<RingId> for usize {
   }
 }
 
-#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct PointId(usize);
 
 impl From<PointId> for usize {
@@ -110,7 +110,7 @@ pub struct DirectedIndexEdge {
 // triangulate: Polygon -> Vec<Polygon>
 // triangulate: Polygon -> Vec<(PointId, PointId, PointId)>
 
-#[derive(Debug, Clone)]
+#[derive(Debug, Clone, Hash)]
 pub struct Polygon<T> {
   // Use points: Arc<Vec<Point<T, 2>>>, ?
   // Key: PointId
@@ -653,13 +653,13 @@ pub struct Cursor<'a, T> {
   pub(crate) position: Position,
 }
 
-impl<'a, T: TotalOrd> TotalOrd for Cursor<'a, T> {
+impl<T: TotalOrd> TotalOrd for Cursor<'_, T> {
   fn total_cmp(&self, other: &Self) -> Ordering {
     self.deref().total_cmp(other.deref())
   }
 }
 
-impl<'a, T> Deref for Cursor<'a, T> {
+impl<T> Deref for Cursor<'_, T> {
   type Target = Point<T>;
   fn deref(&self) -> &Self::Target {
     self.point()
@@ -674,15 +674,12 @@ impl<'a, T> PartialEq for Cursor<'a, T> {
 }
 
 // Can't derive it because T should not be 'Clone'.
-impl<'a, T> Clone for Cursor<'a, T> {
+impl<T> Clone for Cursor<'_, T> {
   fn clone(&self) -> Self {
-    Cursor {
-      polygon: self.polygon,
-      position: self.position,
-    }
+    *self
   }
 }
-impl<'a, T> Copy for Cursor<'a, T> {}
+impl<T> Copy for Cursor<'_, T> {}
 
 impl<'a, T> Cursor<'a, T> {
   pub fn point_id(self) -> PointId {
@@ -965,6 +962,6 @@ pub mod tests {
         return PointLocation::Inside;
       }
     }
-    return PointLocation::Outside;
+    PointLocation::Outside
   }
 }

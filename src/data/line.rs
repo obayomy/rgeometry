@@ -14,13 +14,10 @@ pub struct Line<'a, T, const N: usize = 2> {
   pub direction: Direction<'a, T, N>,
 }
 
-impl<'a, T, const N: usize> Copy for Line<'a, T, N> {}
-impl<'a, T, const N: usize> Clone for Line<'a, T, N> {
+impl<T, const N: usize> Copy for Line<'_, T, N> {}
+impl<T, const N: usize> Clone for Line<'_, T, N> {
   fn clone(&self) -> Self {
-    Line {
-      origin: self.origin,
-      direction: self.direction,
-    }
+    *self
   }
 }
 
@@ -38,7 +35,7 @@ impl<'a, T, const N: usize> Line<'a, T, N> {
   }
 }
 
-impl<'a, T: PolygonScalar> Line<'a, T> {
+impl<T: PolygonScalar> Line<'_, T> {
   pub fn intersection_point(&self, other: &Self) -> Option<Point<T>> {
     let [x1, y1] = self.origin.array.clone();
     let [x2, y2] = match &self.direction {
@@ -96,13 +93,10 @@ pub enum Direction<'a, T, const N: usize> {
   Through(&'a Point<T, N>),
 }
 
-impl<'a, T, const N: usize> Copy for Direction<'a, T, N> {}
-impl<'a, T, const N: usize> Clone for Direction<'a, T, N> {
+impl<T, const N: usize> Copy for Direction<'_, T, N> {}
+impl<T, const N: usize> Clone for Direction<'_, T, N> {
   fn clone(&self) -> Self {
-    match self {
-      Direction::Vector(v) => Direction::Vector(v),
-      Direction::Through(p) => Direction::Through(p),
-    }
+    *self
   }
 }
 
@@ -116,7 +110,7 @@ pub enum Direction_<T, const N: usize> {
 }
 
 impl<'a, T, const N: usize> From<&'a Direction_<T, N>> for Direction<'a, T, N> {
-  fn from(owned: &'a Direction_<T, N>) -> Direction<'_, T, N> {
+  fn from(owned: &'a Direction_<T, N>) -> Direction<'a, T, N> {
     match owned {
       Direction_::Vector(v) => Direction::Vector(v),
       Direction_::Through(p) => Direction::Through(p),
@@ -226,10 +220,10 @@ pub struct HalfLineSoS<'a, T, const N: usize = 2> {
   line: Line<'a, T, N>,
 }
 
-impl<'a, T, const N: usize> Copy for HalfLineSoS<'a, T, N> {}
-impl<'a, T, const N: usize> Clone for HalfLineSoS<'a, T, N> {
+impl<T, const N: usize> Copy for HalfLineSoS<'_, T, N> {}
+impl<T, const N: usize> Clone for HalfLineSoS<'_, T, N> {
   fn clone(&self) -> Self {
-    HalfLineSoS { line: self.line }
+    *self
   }
 }
 
