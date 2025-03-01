@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/algorithms/polygonization/two_opt.rs`."><title>two_opt.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-fa3bb1812debf86c.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="rgeometry" data-themes="" data-resource-suffix="" data-rustdoc-version="1.74.0 (79e9716c9 2023-11-13)" data-channel="1.74.0" data-search-js="search-8be46b629f5f14a8.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-c5bd66d33317d69f.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/algorithms/polygonization/two_opt.rs`."><title>two_opt.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="rgeometry" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../../../static.files/storage-59e33391.js"></script><script defer src="../../../../static.files/src-script-56102188.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -19,7 +19,8 @@
   }
 </style>
 
-</head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../../../rgeometry/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+</head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">rgeometry/algorithms/polygonization/</div>two_opt.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -603,8 +604,7 @@
 <a href="#582" id="582">582</a>
 <a href="#583" id="583">583</a>
 <a href="#584" id="584">584</a>
-<a href="#585" id="585">585</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::data::Cursor;
+<a href="#585" id="585">585</a></pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::data::Cursor;
 <span class="kw">use </span><span class="kw">crate</span>::data::EndPoint;
 <span class="kw">use </span><span class="kw">crate</span>::data::IndexEdge;
 <span class="kw">use </span><span class="kw">crate</span>::data::LineSegmentView;
@@ -638,7 +638,7 @@
     <span class="kw">for </span>e2 <span class="kw">in </span>edges(poly) {
       <span class="kw">if </span>e1 &lt; e2 {
         <span class="kw">if let </span><span class="prelude-val">Some</span>(isect) = intersects(poly, e1, e2) {
-          <span class="comment">// eprintln!(&quot;Inserting new intersection: {:?} {:?}&quot;, e1, e2);
+          <span class="comment">// eprintln!("Inserting new intersection: {:?} {:?}", e1, e2);
           </span>isects.push(isect)
         }
       }
@@ -715,26 +715,26 @@
 //    a1 -&gt; a2
 // b1 -&gt; b2
 //
-// It&#39;s tempting to cut a1 and put it between b1 and b2. This doesn&#39;t change the edge lengths from
+// It's tempting to cut a1 and put it between b1 and b2. This doesn't change the edge lengths from
 // b1 to b2 and it may decrease the edge length from a1.prev to a2. However, if a1 is on a straight
-// line then we haven&#39;t reduced the circumference of the polygon at all. So, we need to find a point
-// that doesn&#39;t lie on a straight line with its neighbours but still lies on the line given by the
+// line then we haven't reduced the circumference of the polygon at all. So, we need to find a point
+// that doesn't lie on a straight line with its neighbours but still lies on the line given by the
 // overlapping edges. Once this point has been found (along with its corresponding edge), it can be
-// cut with the guarantee that it&#39;ll reduce the polygon circumference. Like this:
+// cut with the guarantee that it'll reduce the polygon circumference. Like this:
 //
 //     prev
 //       |
 //       a1 -----&gt; a2
 // b1 -------&gt; b2
 //
-// Cut &#39;a1&#39; and place it between &#39;b1&#39; and &#39;b2&#39;:
+// Cut 'a1' and place it between 'b1' and 'b2':
 //
 //     prev
 //        \------&gt; a2
 // b1 -&gt; a1 -&gt; b2
 //
-// The edge length from &#39;b1-&gt;b2&#39; is identical to &#39;b1-&gt;a1-&gt;b2&#39;.
-// The edge length from &#39;prev-&gt;a1-&gt;a2&#39; is always greater than &#39;prev -&gt; a2&#39;.
+// The edge length from 'b1-&gt;b2' is identical to 'b1-&gt;a1-&gt;b2'.
+// The edge length from 'prev-&gt;a1-&gt;a2' is always greater than 'prev -&gt; a2'.
 // We therefore know that the total circumference has decreased. QED.
 </span><span class="kw">fn </span>untangle&lt;T: PolygonScalar&gt;(
   poly: <span class="kw-2">&amp;mut </span>Polygon&lt;T&gt;,
@@ -743,9 +743,9 @@
 ) {
   <span class="comment">// dbg!(vertex_list.vertices().collect::&lt;Vec&lt;Vertex&gt;&gt;());
   // dbg!(isect);
-  // eprintln!(&quot;Poly order: {:?}&quot;, poly.order);
-  // eprintln!(&quot;Poly pos:   {:?}&quot;, poly.positions);
-  // eprintln!(&quot;Untangle: {:?}&quot;, isect);
+  // eprintln!("Poly order: {:?}", poly.order);
+  // eprintln!("Poly pos:   {:?}", poly.positions);
+  // eprintln!("Untangle: {:?}", isect);
   // let da = poly.direct(isect.min);
   // let db = poly.direct(isect.max);
   </span><span class="kw">let </span>da = poly.cursor(poly.direct(isect.min).src);
@@ -765,20 +765,20 @@
     <span class="kw">for </span>elt <span class="kw">in </span>a_min.to(Included(a_max)).chain(b_min.to(Included(b_max))) {
       <span class="kw">let </span>inner_segment: LineSegmentView&lt;T&gt; = (elt.prev().point()..elt.next().point()).into();
       <span class="kw">if </span>elt.orientation() != Orientation::CoLinear || !inner_segment.contains(elt.point()) {
-        <span class="comment">// We&#39;re either at a corner:
+        <span class="comment">// We're either at a corner:
         //   prev
         //    \
         //     x -- next
-        // Or we&#39;re at u-turn:
+        // Or we're at u-turn:
         //   prev -&gt;  x
         //   next &lt;-  x
-        // In both cases, the circumference will be shortened if we can remove &#39;x&#39;.
+        // In both cases, the circumference will be shortened if we can remove 'x'.
         </span>kinks.push(elt);
       }
     }
 
     <span class="kw">let </span><span class="kw-2">mut </span>mergable = <span class="prelude-val">None</span>;
-    <span class="lifetime">&#39;outer</span>: <span class="kw">for </span>edge <span class="kw">in </span>a_min.to(Excluded(a_max)).chain(b_min.to(Excluded(b_max))) {
+    <span class="lifetime">'outer</span>: <span class="kw">for </span>edge <span class="kw">in </span>a_min.to(Excluded(a_max)).chain(b_min.to(Excluded(b_max))) {
       <span class="kw">let </span>segment = LineSegmentView::new(
         EndPoint::Exclusive(edge.point()),
         EndPoint::Exclusive(edge.next().point()),
@@ -786,7 +786,7 @@
       <span class="kw">for </span><span class="kw-2">&amp;</span>kink <span class="kw">in </span>kinks.iter() {
         <span class="kw">if </span>segment.contains(kink.point()) {
           mergable = <span class="prelude-val">Some</span>((kink, edge));
-          <span class="kw">break </span><span class="lifetime">&#39;outer</span>;
+          <span class="kw">break </span><span class="lifetime">'outer</span>;
         }
       }
     }
@@ -802,9 +802,9 @@
     // }
     // elt is not linear. That is, prev -&gt; elt -&gt; next is not a straight line.
     // Therefore, cutting it and adding to a straight line will shorten the polygon
-    // circumference. Since there&#39;s a lower limit on the circumference, this algorithm
+    // circumference. Since there's a lower limit on the circumference, this algorithm
     // is guaranteed to terminate.
-    </span><span class="kw">let </span>(kink, edge) = mergable.expect(<span class="string">&quot;There must be at least one mergable edge&quot;</span>);
+    </span><span class="kw">let </span>(kink, edge) = mergable.expect(<span class="string">"There must be at least one mergable edge"</span>);
     <span class="comment">// dbg!(elt, edge);
     // let elt_edges = vertex_list.vertex_edges(elt);
     // vertex_list.hoist(elt, edge);
@@ -812,7 +812,7 @@
     <span class="kw">let </span>del_edge_2 = IndexEdge::new(kink.point_id(), kink.next().point_id());
     <span class="kw">let </span>del_edge_3 = IndexEdge::new(edge.point_id(), edge.next().point_id());
     <span class="comment">// eprintln!(
-    //   &quot;Del edges: {:?} {:?} {:?}&quot;,
+    //   "Del edges: {:?} {:?} {:?}",
     //   del_edge_1, del_edge_2, del_edge_3
     // );
     </span>set.remove_all(del_edge_1);
@@ -827,7 +827,7 @@
 
     <span class="kw">let </span>p1 = edge.position;
     <span class="kw">let </span>p2 = kink.position;
-    <span class="comment">// eprintln!(&quot;Hoist: {:?} {:?}&quot;, p1, p2);
+    <span class="comment">// eprintln!("Hoist: {:?} {:?}", p1, p2);
     </span>poly.vertices_join(p1, p2);
   } <span class="kw">else </span>{
     <span class="comment">// vertex_list.uncross(da, db);
@@ -841,17 +841,17 @@
 
     <span class="kw">let </span>p1 = da.next().position;
     <span class="kw">let </span>p2 = db.position;
-    <span class="comment">// eprintln!(&quot;Uncross: {:?} {:?}&quot;, p1, p2);
+    <span class="comment">// eprintln!("Uncross: {:?} {:?}", p1, p2);
     </span>poly.vertices_reverse(p1, p2);
     <span class="comment">// dbg!(&amp;poly.rings[0]);
   </span>}
   <span class="comment">// dbg!(&amp;removed_edges, &amp;inserted_edges);
-  // eprintln!(&quot;New edges: {:?}&quot;, &amp;inserted_edges);
+  // eprintln!("New edges: {:?}", &amp;inserted_edges);
   </span><span class="kw">for </span><span class="kw-2">&amp;</span>edge <span class="kw">in </span>inserted_edges.iter() {
     <span class="kw">for </span>e1 <span class="kw">in </span>edges(poly) {
       <span class="kw">if </span>e1 != edge {
         <span class="kw">if let </span><span class="prelude-val">Some</span>(isect) = intersects(poly, e1, edge) {
-          <span class="comment">// eprintln!(&quot;Inserting new intersection: {:?} {:?}&quot;, e1, edge);
+          <span class="comment">// eprintln!("Inserting new intersection: {:?} {:?}", e1, edge);
           </span>set.push(isect)
         }
       }
@@ -868,10 +868,10 @@
   <span class="kw">let </span>missing: Vec&lt;<span class="kw-2">&amp;</span>IndexIntersection&gt; = naive_set.difference(<span class="kw-2">&amp;</span>fast_set).collect();
   <span class="kw">let </span>extra: Vec&lt;<span class="kw-2">&amp;</span>IndexIntersection&gt; = fast_set.difference(<span class="kw-2">&amp;</span>naive_set).collect();
   <span class="kw">if </span>!missing.is_empty() {
-    <span class="macro">panic!</span>(<span class="string">&quot;Fast set is too small! {:?}&quot;</span>, missing);
+    <span class="macro">panic!</span>(<span class="string">"Fast set is too small! {:?}"</span>, missing);
   }
   <span class="kw">if </span>!extra.is_empty() {
-    <span class="macro">panic!</span>(<span class="string">&quot;Fast set is too large! {:?}&quot;</span>, extra);
+    <span class="macro">panic!</span>(<span class="string">"Fast set is too large! {:?}"</span>, extra);
   }
 }
 
@@ -890,7 +890,7 @@
   set
 }
 
-<span class="kw">fn </span>parallel_edges&lt;T&gt;(a: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;, b: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;) -&gt; bool
+<span class="kw">fn </span>parallel_edges&lt;T&gt;(a: Cursor&lt;<span class="lifetime">'_</span>, T&gt;, b: Cursor&lt;<span class="lifetime">'_</span>, T&gt;) -&gt; bool
 <span class="kw">where
   </span>T: PolygonScalar,
 {
@@ -905,12 +905,12 @@
 /// Example:
 ///    a                    f
 ///     \- b - c - d -&gt; e -/
-/// linear_extremes(&#39;c&#39;) = (&#39;b&#39;, &#39;e&#39;).
-/// &#39;c&#39; is linear (there&#39;s a straight line from &#39;b&#39; to &#39;c&#39; to &#39;d&#39;).
-/// &#39;b&#39; is not linear since the line from &#39;a&#39; to &#39;b&#39; to &#39;c&#39; bends.
-/// &#39;b&#39; is therefore the first leftmost non-linear vertex and &#39;e&#39;
+/// linear_extremes('c') = ('b', 'e').
+/// 'c' is linear (there's a straight line from 'b' to 'c' to 'd').
+/// 'b' is not linear since the line from 'a' to 'b' to 'c' bends.
+/// 'b' is therefore the first leftmost non-linear vertex and 'e'
 /// is the first rightmost non-linear vertex.
-</span><span class="kw">fn </span>linear_extremes&lt;T&gt;(at: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;) -&gt; (Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;, Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;)
+</span><span class="kw">fn </span>linear_extremes&lt;T&gt;(at: Cursor&lt;<span class="lifetime">'_</span>, T&gt;) -&gt; (Cursor&lt;<span class="lifetime">'_</span>, T&gt;, Cursor&lt;<span class="lifetime">'_</span>, T&gt;)
 <span class="kw">where
   </span>T: PolygonScalar,
 {
@@ -926,7 +926,7 @@
   (at_min, at_max)
 }
 
-<span class="kw">fn </span>edges&lt;T&gt;(poly: <span class="kw-2">&amp;</span>Polygon&lt;T&gt;) -&gt; <span class="kw">impl </span>Iterator&lt;Item = IndexEdge&gt; + <span class="lifetime">&#39;_ </span>{
+<span class="kw">fn </span>edges&lt;T&gt;(poly: <span class="kw-2">&amp;</span>Polygon&lt;T&gt;) -&gt; <span class="kw">impl </span>Iterator&lt;Item = IndexEdge&gt; + <span class="lifetime">'_ </span>{
   poly
     .iter_boundary()
     .map(|cursor| IndexEdge::new(cursor.point_id(), cursor.next().point_id()))
@@ -1144,7 +1144,7 @@
   <span class="attr">#[proptest]
   </span><span class="kw">fn </span>points_to_polygon(<span class="attr">#[strategy(vec(any::&lt;Point&lt;i8&gt;&gt;(), <span class="number">3</span>..<span class="number">100</span>))] </span><span class="kw-2">mut </span>pts: Vec&lt;Point&lt;i8&gt;&gt;) {
     <span class="kw">let </span><span class="kw-2">mut </span>set = BTreeSet::new();
-    pts.retain(|pt| set.insert(pt.clone()));
+    pts.retain(|pt| set.insert(<span class="kw-2">*</span>pt));
     <span class="kw">if </span>pts.len() &gt;= <span class="number">3 </span>&amp;&amp; !Point::all_colinear(<span class="kw-2">&amp;</span>pts) {
       <span class="kw">let </span><span class="kw-2">mut </span>rng = StepRng::new(<span class="number">0</span>, <span class="number">0</span>);
       <span class="kw">let </span>ret = two_opt_moves(pts, <span class="kw-2">&amp;mut </span>rng);
@@ -1155,7 +1155,7 @@
   <span class="attr">#[proptest]
   </span><span class="kw">fn </span>f64_to_polygon(<span class="attr">#[strategy(vec(any_nn(), <span class="number">3</span>..<span class="number">100</span>))] </span><span class="kw-2">mut </span>pts: Vec&lt;Point&lt;NotNan&lt;f64&gt;&gt;&gt;) {
     <span class="kw">let </span><span class="kw-2">mut </span>set = BTreeSet::new();
-    pts.retain(|pt| set.insert(pt.clone()));
+    pts.retain(|pt| set.insert(<span class="kw-2">*</span>pt));
     <span class="kw">if </span>pts.len() &gt;= <span class="number">3 </span>&amp;&amp; !Point::all_colinear(<span class="kw-2">&amp;</span>pts) {
       <span class="kw">let </span><span class="kw-2">mut </span>rng = StepRng::new(<span class="number">0</span>, <span class="number">0</span>);
       <span class="kw">let </span>ret = two_opt_moves(pts, <span class="kw-2">&amp;mut </span>rng);

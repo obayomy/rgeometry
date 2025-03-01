@@ -1,4 +1,5 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/index.crates.io-6f17d22bba15001f/ordered-float-3.9.2/src/lib.rs`."><title>lib.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../static.files/rustdoc-fa3bb1812debf86c.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="ordered_float" data-themes="" data-resource-suffix="" data-rustdoc-version="1.74.0 (79e9716c9 2023-11-13)" data-channel="1.74.0" data-search-js="search-8be46b629f5f14a8.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-c5bd66d33317d69f.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../ordered_float/index.html"><img class="rust-logo" src="../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `/home/runner/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/ordered-float-4.6.0/src/lib.rs`."><title>lib.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../" data-static-root-path="../../static.files/" data-current-crate="ordered_float" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../static.files/storage-59e33391.js"></script><script defer src="../../static.files/src-script-56102188.js"></script><script defer src="../../src-files.js"></script><script defer src="../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../static.files/favicon-044be391.svg"></head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">ordered_float/</div>lib.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -2610,16 +2611,293 @@
 <a href="#2610" id="2610">2610</a>
 <a href="#2611" id="2611">2611</a>
 <a href="#2612" id="2612">2612</a>
-</pre></div><pre class="rust"><code><span class="attr">#![no_std]
+<a href="#2613" id="2613">2613</a>
+<a href="#2614" id="2614">2614</a>
+<a href="#2615" id="2615">2615</a>
+<a href="#2616" id="2616">2616</a>
+<a href="#2617" id="2617">2617</a>
+<a href="#2618" id="2618">2618</a>
+<a href="#2619" id="2619">2619</a>
+<a href="#2620" id="2620">2620</a>
+<a href="#2621" id="2621">2621</a>
+<a href="#2622" id="2622">2622</a>
+<a href="#2623" id="2623">2623</a>
+<a href="#2624" id="2624">2624</a>
+<a href="#2625" id="2625">2625</a>
+<a href="#2626" id="2626">2626</a>
+<a href="#2627" id="2627">2627</a>
+<a href="#2628" id="2628">2628</a>
+<a href="#2629" id="2629">2629</a>
+<a href="#2630" id="2630">2630</a>
+<a href="#2631" id="2631">2631</a>
+<a href="#2632" id="2632">2632</a>
+<a href="#2633" id="2633">2633</a>
+<a href="#2634" id="2634">2634</a>
+<a href="#2635" id="2635">2635</a>
+<a href="#2636" id="2636">2636</a>
+<a href="#2637" id="2637">2637</a>
+<a href="#2638" id="2638">2638</a>
+<a href="#2639" id="2639">2639</a>
+<a href="#2640" id="2640">2640</a>
+<a href="#2641" id="2641">2641</a>
+<a href="#2642" id="2642">2642</a>
+<a href="#2643" id="2643">2643</a>
+<a href="#2644" id="2644">2644</a>
+<a href="#2645" id="2645">2645</a>
+<a href="#2646" id="2646">2646</a>
+<a href="#2647" id="2647">2647</a>
+<a href="#2648" id="2648">2648</a>
+<a href="#2649" id="2649">2649</a>
+<a href="#2650" id="2650">2650</a>
+<a href="#2651" id="2651">2651</a>
+<a href="#2652" id="2652">2652</a>
+<a href="#2653" id="2653">2653</a>
+<a href="#2654" id="2654">2654</a>
+<a href="#2655" id="2655">2655</a>
+<a href="#2656" id="2656">2656</a>
+<a href="#2657" id="2657">2657</a>
+<a href="#2658" id="2658">2658</a>
+<a href="#2659" id="2659">2659</a>
+<a href="#2660" id="2660">2660</a>
+<a href="#2661" id="2661">2661</a>
+<a href="#2662" id="2662">2662</a>
+<a href="#2663" id="2663">2663</a>
+<a href="#2664" id="2664">2664</a>
+<a href="#2665" id="2665">2665</a>
+<a href="#2666" id="2666">2666</a>
+<a href="#2667" id="2667">2667</a>
+<a href="#2668" id="2668">2668</a>
+<a href="#2669" id="2669">2669</a>
+<a href="#2670" id="2670">2670</a>
+<a href="#2671" id="2671">2671</a>
+<a href="#2672" id="2672">2672</a>
+<a href="#2673" id="2673">2673</a>
+<a href="#2674" id="2674">2674</a>
+<a href="#2675" id="2675">2675</a>
+<a href="#2676" id="2676">2676</a>
+<a href="#2677" id="2677">2677</a>
+<a href="#2678" id="2678">2678</a>
+<a href="#2679" id="2679">2679</a>
+<a href="#2680" id="2680">2680</a>
+<a href="#2681" id="2681">2681</a>
+<a href="#2682" id="2682">2682</a>
+<a href="#2683" id="2683">2683</a>
+<a href="#2684" id="2684">2684</a>
+<a href="#2685" id="2685">2685</a>
+<a href="#2686" id="2686">2686</a>
+<a href="#2687" id="2687">2687</a>
+<a href="#2688" id="2688">2688</a>
+<a href="#2689" id="2689">2689</a>
+<a href="#2690" id="2690">2690</a>
+<a href="#2691" id="2691">2691</a>
+<a href="#2692" id="2692">2692</a>
+<a href="#2693" id="2693">2693</a>
+<a href="#2694" id="2694">2694</a>
+<a href="#2695" id="2695">2695</a>
+<a href="#2696" id="2696">2696</a>
+<a href="#2697" id="2697">2697</a>
+<a href="#2698" id="2698">2698</a>
+<a href="#2699" id="2699">2699</a>
+<a href="#2700" id="2700">2700</a>
+<a href="#2701" id="2701">2701</a>
+<a href="#2702" id="2702">2702</a>
+<a href="#2703" id="2703">2703</a>
+<a href="#2704" id="2704">2704</a>
+<a href="#2705" id="2705">2705</a>
+<a href="#2706" id="2706">2706</a>
+<a href="#2707" id="2707">2707</a>
+<a href="#2708" id="2708">2708</a>
+<a href="#2709" id="2709">2709</a>
+<a href="#2710" id="2710">2710</a>
+<a href="#2711" id="2711">2711</a>
+<a href="#2712" id="2712">2712</a>
+<a href="#2713" id="2713">2713</a>
+<a href="#2714" id="2714">2714</a>
+<a href="#2715" id="2715">2715</a>
+<a href="#2716" id="2716">2716</a>
+<a href="#2717" id="2717">2717</a>
+<a href="#2718" id="2718">2718</a>
+<a href="#2719" id="2719">2719</a>
+<a href="#2720" id="2720">2720</a>
+<a href="#2721" id="2721">2721</a>
+<a href="#2722" id="2722">2722</a>
+<a href="#2723" id="2723">2723</a>
+<a href="#2724" id="2724">2724</a>
+<a href="#2725" id="2725">2725</a>
+<a href="#2726" id="2726">2726</a>
+<a href="#2727" id="2727">2727</a>
+<a href="#2728" id="2728">2728</a>
+<a href="#2729" id="2729">2729</a>
+<a href="#2730" id="2730">2730</a>
+<a href="#2731" id="2731">2731</a>
+<a href="#2732" id="2732">2732</a>
+<a href="#2733" id="2733">2733</a>
+<a href="#2734" id="2734">2734</a>
+<a href="#2735" id="2735">2735</a>
+<a href="#2736" id="2736">2736</a>
+<a href="#2737" id="2737">2737</a>
+<a href="#2738" id="2738">2738</a>
+<a href="#2739" id="2739">2739</a>
+<a href="#2740" id="2740">2740</a>
+<a href="#2741" id="2741">2741</a>
+<a href="#2742" id="2742">2742</a>
+<a href="#2743" id="2743">2743</a>
+<a href="#2744" id="2744">2744</a>
+<a href="#2745" id="2745">2745</a>
+<a href="#2746" id="2746">2746</a>
+<a href="#2747" id="2747">2747</a>
+<a href="#2748" id="2748">2748</a>
+<a href="#2749" id="2749">2749</a>
+<a href="#2750" id="2750">2750</a>
+<a href="#2751" id="2751">2751</a>
+<a href="#2752" id="2752">2752</a>
+<a href="#2753" id="2753">2753</a>
+<a href="#2754" id="2754">2754</a>
+<a href="#2755" id="2755">2755</a>
+<a href="#2756" id="2756">2756</a>
+<a href="#2757" id="2757">2757</a>
+<a href="#2758" id="2758">2758</a>
+<a href="#2759" id="2759">2759</a>
+<a href="#2760" id="2760">2760</a>
+<a href="#2761" id="2761">2761</a>
+<a href="#2762" id="2762">2762</a>
+<a href="#2763" id="2763">2763</a>
+<a href="#2764" id="2764">2764</a>
+<a href="#2765" id="2765">2765</a>
+<a href="#2766" id="2766">2766</a>
+<a href="#2767" id="2767">2767</a>
+<a href="#2768" id="2768">2768</a>
+<a href="#2769" id="2769">2769</a>
+<a href="#2770" id="2770">2770</a>
+<a href="#2771" id="2771">2771</a>
+<a href="#2772" id="2772">2772</a>
+<a href="#2773" id="2773">2773</a>
+<a href="#2774" id="2774">2774</a>
+<a href="#2775" id="2775">2775</a>
+<a href="#2776" id="2776">2776</a>
+<a href="#2777" id="2777">2777</a>
+<a href="#2778" id="2778">2778</a>
+<a href="#2779" id="2779">2779</a>
+<a href="#2780" id="2780">2780</a>
+<a href="#2781" id="2781">2781</a>
+<a href="#2782" id="2782">2782</a>
+<a href="#2783" id="2783">2783</a>
+<a href="#2784" id="2784">2784</a>
+<a href="#2785" id="2785">2785</a>
+<a href="#2786" id="2786">2786</a>
+<a href="#2787" id="2787">2787</a>
+<a href="#2788" id="2788">2788</a>
+<a href="#2789" id="2789">2789</a>
+<a href="#2790" id="2790">2790</a>
+<a href="#2791" id="2791">2791</a>
+<a href="#2792" id="2792">2792</a>
+<a href="#2793" id="2793">2793</a>
+<a href="#2794" id="2794">2794</a>
+<a href="#2795" id="2795">2795</a>
+<a href="#2796" id="2796">2796</a>
+<a href="#2797" id="2797">2797</a>
+<a href="#2798" id="2798">2798</a>
+<a href="#2799" id="2799">2799</a>
+<a href="#2800" id="2800">2800</a>
+<a href="#2801" id="2801">2801</a>
+<a href="#2802" id="2802">2802</a>
+<a href="#2803" id="2803">2803</a>
+<a href="#2804" id="2804">2804</a>
+<a href="#2805" id="2805">2805</a>
+<a href="#2806" id="2806">2806</a>
+<a href="#2807" id="2807">2807</a>
+<a href="#2808" id="2808">2808</a>
+<a href="#2809" id="2809">2809</a>
+<a href="#2810" id="2810">2810</a>
+<a href="#2811" id="2811">2811</a>
+<a href="#2812" id="2812">2812</a>
+<a href="#2813" id="2813">2813</a>
+<a href="#2814" id="2814">2814</a>
+<a href="#2815" id="2815">2815</a>
+<a href="#2816" id="2816">2816</a>
+<a href="#2817" id="2817">2817</a>
+<a href="#2818" id="2818">2818</a>
+<a href="#2819" id="2819">2819</a>
+<a href="#2820" id="2820">2820</a>
+<a href="#2821" id="2821">2821</a>
+<a href="#2822" id="2822">2822</a>
+<a href="#2823" id="2823">2823</a>
+<a href="#2824" id="2824">2824</a>
+<a href="#2825" id="2825">2825</a>
+<a href="#2826" id="2826">2826</a>
+<a href="#2827" id="2827">2827</a>
+<a href="#2828" id="2828">2828</a>
+<a href="#2829" id="2829">2829</a>
+<a href="#2830" id="2830">2830</a>
+<a href="#2831" id="2831">2831</a>
+<a href="#2832" id="2832">2832</a>
+<a href="#2833" id="2833">2833</a>
+<a href="#2834" id="2834">2834</a>
+<a href="#2835" id="2835">2835</a>
+<a href="#2836" id="2836">2836</a>
+<a href="#2837" id="2837">2837</a>
+<a href="#2838" id="2838">2838</a>
+<a href="#2839" id="2839">2839</a>
+<a href="#2840" id="2840">2840</a>
+<a href="#2841" id="2841">2841</a>
+<a href="#2842" id="2842">2842</a>
+<a href="#2843" id="2843">2843</a>
+<a href="#2844" id="2844">2844</a>
+<a href="#2845" id="2845">2845</a>
+<a href="#2846" id="2846">2846</a>
+<a href="#2847" id="2847">2847</a>
+<a href="#2848" id="2848">2848</a>
+<a href="#2849" id="2849">2849</a>
+<a href="#2850" id="2850">2850</a>
+<a href="#2851" id="2851">2851</a>
+<a href="#2852" id="2852">2852</a>
+<a href="#2853" id="2853">2853</a>
+<a href="#2854" id="2854">2854</a>
+<a href="#2855" id="2855">2855</a>
+<a href="#2856" id="2856">2856</a>
+<a href="#2857" id="2857">2857</a>
+<a href="#2858" id="2858">2858</a>
+<a href="#2859" id="2859">2859</a>
+<a href="#2860" id="2860">2860</a>
+<a href="#2861" id="2861">2861</a>
+<a href="#2862" id="2862">2862</a>
+<a href="#2863" id="2863">2863</a>
+<a href="#2864" id="2864">2864</a>
+<a href="#2865" id="2865">2865</a>
+<a href="#2866" id="2866">2866</a>
+<a href="#2867" id="2867">2867</a>
+<a href="#2868" id="2868">2868</a>
+<a href="#2869" id="2869">2869</a>
+<a href="#2870" id="2870">2870</a>
+<a href="#2871" id="2871">2871</a>
+<a href="#2872" id="2872">2872</a>
+<a href="#2873" id="2873">2873</a>
+<a href="#2874" id="2874">2874</a>
+<a href="#2875" id="2875">2875</a>
+<a href="#2876" id="2876">2876</a>
+<a href="#2877" id="2877">2877</a>
+<a href="#2878" id="2878">2878</a>
+<a href="#2879" id="2879">2879</a>
+<a href="#2880" id="2880">2880</a>
+<a href="#2881" id="2881">2881</a>
+<a href="#2882" id="2882">2882</a>
+<a href="#2883" id="2883">2883</a>
+<a href="#2884" id="2884">2884</a>
+<a href="#2885" id="2885">2885</a>
+<a href="#2886" id="2886">2886</a>
+<a href="#2887" id="2887">2887</a>
+<a href="#2888" id="2888">2888</a>
+<a href="#2889" id="2889">2889</a>
+<a href="#2890" id="2890">2890</a></pre></div><pre class="rust"><code><span class="attr">#![no_std]
 #![cfg_attr(test, deny(warnings))]
 #![deny(missing_docs)]
 #![allow(clippy::derive_partial_eq_without_eq)]
 
 </span><span class="doccomment">//! Wrappers for total order on Floats.  See the [`OrderedFloat`] and [`NotNan`] docs for details.
 
-</span><span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+</span><span class="attr">#[cfg(feature = <span class="string">"std"</span>)]
 </span><span class="kw">extern crate </span>std;
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"std"</span>)]
 </span><span class="kw">use </span>std::error::Error;
 
 <span class="kw">use </span>core::borrow::Borrow;
@@ -2627,7 +2905,6 @@
 <span class="kw">use </span>core::convert::TryFrom;
 <span class="kw">use </span>core::fmt;
 <span class="kw">use </span>core::hash::{Hash, Hasher};
-<span class="kw">use </span>core::hint::unreachable_unchecked;
 <span class="kw">use </span>core::iter::{Product, Sum};
 <span class="kw">use </span>core::num::FpCategory;
 <span class="kw">use </span>core::ops::{
@@ -2636,15 +2913,14 @@
 };
 <span class="kw">use </span>core::str::FromStr;
 
-<span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-</span><span class="kw">use </span>num_traits::float::FloatCore <span class="kw">as </span>Float;
+<span class="kw">pub use </span>num_traits::float::FloatCore;
 <span class="kw">use </span>num_traits::{
     AsPrimitive, Bounded, FloatConst, FromPrimitive, Num, NumCast, One, Signed, ToPrimitive, Zero,
 };
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+<span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
 </span><span class="kw">pub use </span>num_traits::{Float, Pow};
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;rand&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"rand"</span>)]
 </span><span class="kw">pub use </span>impl_rand::{UniformNotNan, UniformOrdered};
 
 <span class="comment">// masks for the parts of the IEEE 754 float
@@ -2656,7 +2932,7 @@
 </span><span class="kw">const </span>CANONICAL_NAN_BITS: u64 = <span class="number">0x7ff8000000000000u64</span>;
 
 <span class="attr">#[inline(always)]
-</span><span class="kw">fn </span>canonicalize_signed_zero&lt;T: Float&gt;(x: T) -&gt; T {
+</span><span class="kw">fn </span>canonicalize_signed_zero&lt;T: FloatCore&gt;(x: T) -&gt; T {
     <span class="comment">// -0.0 + 0.0 == +0.0 under IEEE754 roundTiesToEven rounding mode,
     // which Rust guarantees. Thus by adding a positive zero we
     // canonicalize signed zero without any branches in one instruction.
@@ -2684,16 +2960,167 @@
 /// # use ordered_float::OrderedFloat;
 /// # use std::collections::HashSet;
 /// # use std::f32::NAN;
-///
 /// let mut s: HashSet&lt;OrderedFloat&lt;f32&gt;&gt; = HashSet::new();
 /// s.insert(OrderedFloat(NAN));
 /// assert!(s.contains(&amp;OrderedFloat(NAN)));
 /// ```
-</span><span class="attr">#[derive(Debug, Default, Clone, Copy)]
+///
+/// Some non-identical values are still considered equal by the [`PartialEq`] implementation,
+/// and will therefore also be considered equal by maps, sets, and the `==` operator:
+///
+/// * `-0.0` and `+0.0` are considered equal.
+///   This different sign may show up in printing, or when dividing by zero (the sign of the zero
+///   becomes the sign of the resulting infinity).
+/// * All NaN values are considered equal, even though they may have different
+///   [bits](https://doc.rust-lang.org/std/primitive.f64.html#method.to_bits), and therefore
+///   different [sign](https://doc.rust-lang.org/std/primitive.f64.html#method.is_sign_positive),
+///   signaling/quiet status, and NaN payload bits.
+///   
+/// Therefore, `OrderedFloat` may be unsuitable for use as a key in interning and memoization
+/// applications which require equal results from equal inputs, unless these cases make no
+/// difference or are canonicalized before insertion.
+///
+/// # Representation
+///
+/// `OrderedFloat` has `#[repr(transparent)]` and permits any value, so it is sound to use
+/// [transmute](core::mem::transmute) or pointer casts to convert between any type `T` and
+/// `OrderedFloat&lt;T&gt;`.
+/// However, consider using [`bytemuck`] as a safe alternative if possible.
+///
+</span><span class="attr">#[cfg_attr(
+    not(feature = <span class="string">"bytemuck"</span>),
+    doc = <span class="string">"[`bytemuck`]: https://docs.rs/bytemuck/1/"
+</span>)]
+#[derive(Default, Clone, Copy)]
 #[repr(transparent)]
 </span><span class="kw">pub struct </span>OrderedFloat&lt;T&gt;(<span class="kw">pub </span>T);
 
-<span class="kw">impl</span>&lt;T: Float&gt; OrderedFloat&lt;T&gt; {
+<span class="attr">#[cfg(feature = <span class="string">"derive-visitor"</span>)]
+</span><span class="kw">mod </span>impl_derive_visitor {
+    <span class="kw">use </span><span class="kw">crate</span>::OrderedFloat;
+    <span class="kw">use </span>derive_visitor::{Drive, DriveMut, Event, Visitor, VisitorMut};
+
+    <span class="kw">impl</span>&lt;T: <span class="lifetime">'static</span>&gt; Drive <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+        <span class="kw">fn </span>drive&lt;V: Visitor&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, visitor: <span class="kw-2">&amp;mut </span>V) {
+            visitor.visit(<span class="self">self</span>, Event::Enter);
+            visitor.visit(<span class="self">self</span>, Event::Exit);
+        }
+    }
+
+    <span class="kw">impl</span>&lt;T: <span class="lifetime">'static</span>&gt; DriveMut <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+        <span class="kw">fn </span>drive_mut&lt;V: VisitorMut&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, visitor: <span class="kw-2">&amp;mut </span>V) {
+            visitor.visit(<span class="self">self</span>, Event::Enter);
+            visitor.visit(<span class="self">self</span>, Event::Exit);
+        }
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">pub fn </span>test_derive_visitor() {
+        <span class="attr">#[derive(Debug, Clone, PartialEq, Eq, Drive, DriveMut)]
+        </span><span class="kw">pub enum </span>Literal {
+            Null,
+            Float(OrderedFloat&lt;f64&gt;),
+        }
+
+        <span class="attr">#[derive(Visitor, VisitorMut)]
+        #[visitor(Literal(enter))]
+        </span><span class="kw">struct </span>FloatExpr(bool);
+
+        <span class="kw">impl </span>FloatExpr {
+            <span class="kw">fn </span>enter_literal(<span class="kw-2">&amp;mut </span><span class="self">self</span>, lit: <span class="kw-2">&amp;</span>Literal) {
+                <span class="kw">if let </span>Literal::Float(<span class="kw">_</span>) = lit {
+                    <span class="self">self</span>.<span class="number">0 </span>= <span class="bool-val">true</span>;
+                }
+            }
+        }
+
+        <span class="macro">assert!</span>({
+            <span class="kw">let </span><span class="kw-2">mut </span>visitor = FloatExpr(<span class="bool-val">false</span>);
+            Literal::Null.drive(<span class="kw-2">&amp;mut </span>visitor);
+            !visitor.<span class="number">0
+        </span>});
+
+        <span class="macro">assert!</span>({
+            <span class="kw">let </span><span class="kw-2">mut </span>visitor = FloatExpr(<span class="bool-val">false</span>);
+            Literal::Null.drive_mut(<span class="kw-2">&amp;mut </span>visitor);
+            !visitor.<span class="number">0
+        </span>});
+
+        <span class="macro">assert!</span>({
+            <span class="kw">let </span><span class="kw-2">mut </span>visitor = FloatExpr(<span class="bool-val">false</span>);
+            Literal::Float(OrderedFloat(<span class="number">0.0</span>)).drive(<span class="kw-2">&amp;mut </span>visitor);
+            visitor.<span class="number">0
+        </span>});
+
+        <span class="macro">assert!</span>({
+            <span class="kw">let </span><span class="kw-2">mut </span>visitor = FloatExpr(<span class="bool-val">false</span>);
+            Literal::Float(OrderedFloat(<span class="number">0.0</span>)).drive_mut(<span class="kw-2">&amp;mut </span>visitor);
+            visitor.<span class="number">0
+        </span>});
+    }
+}
+
+<span class="attr">#[cfg(feature = <span class="string">"num-cmp"</span>)]
+</span><span class="kw">mod </span>impl_num_cmp {
+    <span class="kw">use </span><span class="kw">super</span>::OrderedFloat;
+    <span class="kw">use </span>core::cmp::Ordering;
+    <span class="kw">use </span>num_cmp::NumCmp;
+    <span class="kw">use </span>num_traits::float::FloatCore;
+
+    <span class="kw">impl</span>&lt;T, U&gt; NumCmp&lt;U&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
+    <span class="kw">where
+        </span>T: FloatCore + NumCmp&lt;U&gt;,
+        U: Copy,
+    {
+        <span class="kw">fn </span>num_cmp(<span class="self">self</span>, other: U) -&gt; <span class="prelude-ty">Option</span>&lt;Ordering&gt; {
+            NumCmp::num_cmp(<span class="self">self</span>.<span class="number">0</span>, other)
+        }
+
+        <span class="kw">fn </span>num_eq(<span class="self">self</span>, other: U) -&gt; bool {
+            NumCmp::num_eq(<span class="self">self</span>.<span class="number">0</span>, other)
+        }
+
+        <span class="kw">fn </span>num_ne(<span class="self">self</span>, other: U) -&gt; bool {
+            NumCmp::num_ne(<span class="self">self</span>.<span class="number">0</span>, other)
+        }
+
+        <span class="kw">fn </span>num_lt(<span class="self">self</span>, other: U) -&gt; bool {
+            NumCmp::num_lt(<span class="self">self</span>.<span class="number">0</span>, other)
+        }
+
+        <span class="kw">fn </span>num_gt(<span class="self">self</span>, other: U) -&gt; bool {
+            NumCmp::num_gt(<span class="self">self</span>.<span class="number">0</span>, other)
+        }
+
+        <span class="kw">fn </span>num_le(<span class="self">self</span>, other: U) -&gt; bool {
+            NumCmp::num_le(<span class="self">self</span>.<span class="number">0</span>, other)
+        }
+
+        <span class="kw">fn </span>num_ge(<span class="self">self</span>, other: U) -&gt; bool {
+            NumCmp::num_ge(<span class="self">self</span>.<span class="number">0</span>, other)
+        }
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">pub fn </span>test_num_cmp() {
+        <span class="kw">let </span>f = OrderedFloat(<span class="number">1.0</span>);
+
+        <span class="macro">assert_eq!</span>(NumCmp::num_cmp(f, <span class="number">1.0</span>), <span class="prelude-val">Some</span>(Ordering::Equal));
+        <span class="macro">assert_eq!</span>(NumCmp::num_cmp(f, -<span class="number">1.0</span>), <span class="prelude-val">Some</span>(Ordering::Greater));
+        <span class="macro">assert_eq!</span>(NumCmp::num_cmp(f, <span class="number">2.0</span>), <span class="prelude-val">Some</span>(Ordering::Less));
+
+        <span class="macro">assert!</span>(NumCmp::num_eq(f, <span class="number">1</span>));
+        <span class="macro">assert!</span>(NumCmp::num_ne(f, -<span class="number">1</span>));
+        <span class="macro">assert!</span>(NumCmp::num_lt(f, <span class="number">100</span>));
+        <span class="macro">assert!</span>(NumCmp::num_gt(f, <span class="number">0</span>));
+        <span class="macro">assert!</span>(NumCmp::num_le(f, <span class="number">1</span>));
+        <span class="macro">assert!</span>(NumCmp::num_le(f, <span class="number">2</span>));
+        <span class="macro">assert!</span>(NumCmp::num_ge(f, <span class="number">1</span>));
+        <span class="macro">assert!</span>(NumCmp::num_ge(f, -<span class="number">1</span>));
+    }
+}
+
+<span class="kw">impl</span>&lt;T: FloatCore&gt; OrderedFloat&lt;T&gt; {
     <span class="doccomment">/// Get the value out.
     </span><span class="attr">#[inline]
     </span><span class="kw">pub fn </span>into_inner(<span class="self">self</span>) -&gt; T {
@@ -2701,37 +3128,37 @@
     </span>}
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; AsRef&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; AsRef&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0
     </span>}
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; AsMut&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; AsMut&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>as_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span>T {
         <span class="kw-2">&amp;mut </span><span class="self">self</span>.<span class="number">0
     </span>}
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Float&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: FloatCore&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>from(t: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt; {
+    </span><span class="kw">fn </span>from(t: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>T) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt; {
         <span class="comment">// Safety: OrderedFloat is #[repr(transparent)] and has no invalid values.
         </span><span class="kw">unsafe </span>{ <span class="kw-2">&amp;*</span>(t <span class="kw">as </span><span class="kw-2">*const </span>T <span class="kw">as </span><span class="kw-2">*const </span>OrderedFloat&lt;T&gt;) }
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Float&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: FloatCore&gt; From&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="kw-2">mut </span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="kw-2">mut </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>from(t: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>T) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="kw-2">mut </span>OrderedFloat&lt;T&gt; {
+    </span><span class="kw">fn </span>from(t: <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="kw-2">mut </span>T) -&gt; <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="kw-2">mut </span>OrderedFloat&lt;T&gt; {
         <span class="comment">// Safety: OrderedFloat is #[repr(transparent)] and has no invalid values.
         </span><span class="kw">unsafe </span>{ <span class="kw-2">&amp;mut *</span>(t <span class="kw">as </span><span class="kw-2">*mut </span>T <span class="kw">as </span><span class="kw-2">*mut </span>OrderedFloat&lt;T&gt;) }
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; PartialOrd <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; PartialOrd <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>partial_cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;Ordering&gt; {
         <span class="prelude-val">Some</span>(<span class="self">self</span>.cmp(other))
@@ -2763,7 +3190,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Ord <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Ord <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; Ordering {
         <span class="attr">#[allow(clippy::comparison_chain)]
@@ -2777,7 +3204,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; PartialEq <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; PartialEq <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>OrderedFloat&lt;T&gt;) -&gt; bool {
         <span class="kw">if </span><span class="self">self</span>.<span class="number">0</span>.is_nan() {
@@ -2788,14 +3215,14 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; PartialEq&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; PartialEq&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>T) -&gt; bool {
         <span class="self">self</span>.<span class="number">0 </span>== <span class="kw-2">*</span>other
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Hash <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Hash <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>H) {
         <span class="kw">let </span>bits = <span class="kw">if </span><span class="self">self</span>.is_nan() {
             CANONICAL_NAN_BITS
@@ -2807,23 +3234,30 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + fmt::Display&gt; fmt::Display <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: fmt::Debug&gt; fmt::Debug <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         <span class="self">self</span>.<span class="number">0</span>.fmt(f)
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + fmt::LowerExp&gt; fmt::LowerExp <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + fmt::Display&gt; fmt::Display <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
+    </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         <span class="self">self</span>.<span class="number">0</span>.fmt(f)
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + fmt::UpperExp&gt; fmt::UpperExp <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + fmt::LowerExp&gt; fmt::LowerExp <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">&#39;_</span>&gt;) -&gt; fmt::Result {
+    </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; fmt::Result {
+        <span class="self">self</span>.<span class="number">0</span>.fmt(f)
+    }
+}
+
+<span class="kw">impl</span>&lt;T: FloatCore + fmt::UpperExp&gt; fmt::UpperExp <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter&lt;<span class="lifetime">'_</span>&gt;) -&gt; fmt::Result {
         <span class="self">self</span>.<span class="number">0</span>.fmt(f)
     }
 }
@@ -2842,7 +3276,7 @@
     </span>}
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; From&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; From&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>from(val: T) -&gt; <span class="self">Self </span>{
         OrderedFloat(val)
@@ -2861,7 +3295,7 @@
     }
 }
 
-<span class="macro">macro_rules! </span>impl_ordered_float_from {
+<span class="macro">macro_rules!</span> impl_ordered_float_from {
     (<span class="macro-nonterminal">$dst</span>:ty, <span class="macro-nonterminal">$src</span>:ty) =&gt; {
         <span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$src</span>&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$dst</span>&gt; {
             <span class="kw">fn </span>from(val: <span class="macro-nonterminal">$src</span>) -&gt; <span class="self">Self </span>{
@@ -2870,18 +3304,18 @@
         }
     };
 }
-<span class="macro">impl_ordered_float_from! </span>{f64, i8}
-<span class="macro">impl_ordered_float_from! </span>{f64, i16}
-<span class="macro">impl_ordered_float_from! </span>{f64, i32}
-<span class="macro">impl_ordered_float_from! </span>{f64, u8}
-<span class="macro">impl_ordered_float_from! </span>{f64, u16}
-<span class="macro">impl_ordered_float_from! </span>{f64, u32}
-<span class="macro">impl_ordered_float_from! </span>{f32, i8}
-<span class="macro">impl_ordered_float_from! </span>{f32, i16}
-<span class="macro">impl_ordered_float_from! </span>{f32, u8}
-<span class="macro">impl_ordered_float_from! </span>{f32, u16}
+<span class="macro">impl_ordered_float_from!</span> {f64, i8}
+<span class="macro">impl_ordered_float_from!</span> {f64, i16}
+<span class="macro">impl_ordered_float_from!</span> {f64, i32}
+<span class="macro">impl_ordered_float_from!</span> {f64, u8}
+<span class="macro">impl_ordered_float_from!</span> {f64, u16}
+<span class="macro">impl_ordered_float_from!</span> {f64, u32}
+<span class="macro">impl_ordered_float_from!</span> {f32, i8}
+<span class="macro">impl_ordered_float_from!</span> {f32, i16}
+<span class="macro">impl_ordered_float_from!</span> {f32, u8}
+<span class="macro">impl_ordered_float_from!</span> {f32, u16}
 
-<span class="kw">impl</span>&lt;T: Float&gt; Deref <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Deref <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="kw">type </span>Target = T;
 
     <span class="attr">#[inline]
@@ -2890,18 +3324,28 @@
     </span>}
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; DerefMut <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; DerefMut <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>deref_mut(<span class="kw-2">&amp;mut </span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;mut </span><span class="self">Self</span>::Target {
         <span class="kw-2">&amp;mut </span><span class="self">self</span>.<span class="number">0
     </span>}
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Eq <span class="kw">for </span>OrderedFloat&lt;T&gt; {}
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Eq <span class="kw">for </span>OrderedFloat&lt;T&gt; {}
 
-<span class="macro">macro_rules! </span>impl_ordered_float_binop {
+<span class="macro">macro_rules!</span> impl_ordered_float_binop {
     (<span class="macro-nonterminal">$imp</span>:ident, <span class="macro-nonterminal">$method</span>:ident, <span class="macro-nonterminal">$assign_imp</span>:ident, <span class="macro-nonterminal">$assign_method</span>:ident) =&gt; {
         <span class="kw">impl</span>&lt;T: <span class="macro-nonterminal">$imp</span>&gt; <span class="macro-nonterminal">$imp </span><span class="kw">for </span>OrderedFloat&lt;T&gt; {
+            <span class="kw">type </span>Output = OrderedFloat&lt;T::Output&gt;;
+
+            <span class="attr">#[inline]
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self</span>::Output {
+                OrderedFloat((<span class="self">self</span>.<span class="number">0</span>).<span class="macro-nonterminal">$method</span>(other.<span class="number">0</span>))
+            }
+        }
+
+        <span class="comment">// Work around for: https://github.com/reem/rust-ordered-float/issues/91
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: <span class="macro-nonterminal">$imp </span>+ Copy&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="self">Self</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;T::Output&gt;;
 
             <span class="attr">#[inline]
@@ -2919,35 +3363,35 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
         <span class="kw">where
-            </span>T: <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt;,
+            </span>T: <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt;,
         {
-            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt;&gt;::Output&gt;;
+            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt;&gt;::Output&gt;;
 
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T) -&gt; <span class="self">Self</span>::Output {
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>T) -&gt; <span class="self">Self</span>::Output {
                 OrderedFloat((<span class="self">self</span>.<span class="number">0</span>).<span class="macro-nonterminal">$method</span>(other))
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">Self</span>&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
         <span class="kw">where
-            </span>T: <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt;,
+            </span>T: <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt;,
         {
-            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt;&gt;::Output&gt;;
+            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt;&gt;::Output&gt;;
 
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>) -&gt; <span class="self">Self</span>::Output {
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">Self</span>) -&gt; <span class="self">Self</span>::Output {
                 OrderedFloat((<span class="self">self</span>.<span class="number">0</span>).<span class="macro-nonterminal">$method</span>(<span class="kw-2">&amp;</span>other.<span class="number">0</span>))
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;OrderedFloat&lt;T&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;OrderedFloat&lt;T&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;
         <span class="kw">where
-            </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T: <span class="macro-nonterminal">$imp</span>&lt;T&gt;,
+            </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>T: <span class="macro-nonterminal">$imp</span>&lt;T&gt;,
         {
-            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;T&gt;&gt;::Output&gt;;
+            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;T&gt;&gt;::Output&gt;;
 
             <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: OrderedFloat&lt;T&gt;) -&gt; <span class="self">Self</span>::Output {
@@ -2955,11 +3399,11 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;
         <span class="kw">where
-            </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T: <span class="macro-nonterminal">$imp</span>&lt;T&gt;,
+            </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>T: <span class="macro-nonterminal">$imp</span>&lt;T&gt;,
         {
-            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;T&gt;&gt;::Output&gt;;
+            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&lt;T&gt;&gt;::Output&gt;;
 
             <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: T) -&gt; <span class="self">Self</span>::Output {
@@ -2967,14 +3411,14 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;
         <span class="kw">where
-            </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T: <span class="macro-nonterminal">$imp</span>,
+            </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>T: <span class="macro-nonterminal">$imp</span>,
         {
-            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&gt;::Output&gt;;
+            <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T <span class="kw">as </span><span class="macro-nonterminal">$imp</span>&gt;::Output&gt;;
 
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T) -&gt; <span class="self">Self</span>::Output {
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$method</span>(<span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>T) -&gt; <span class="self">Self</span>::Output {
                 OrderedFloat((<span class="self">self</span>.<span class="number">0</span>).<span class="macro-nonterminal">$method</span>(other))
             }
         }
@@ -2986,9 +3430,9 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt;&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt;&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T) {
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>T) {
                 (<span class="self">self</span>.<span class="number">0</span>).<span class="macro-nonterminal">$assign_method</span>(other);
             }
         }
@@ -3000,24 +3444,24 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T&gt;&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+        <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T&gt;&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">Self</span>&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>) {
+            </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">Self</span>) {
                 (<span class="self">self</span>.<span class="number">0</span>).<span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;</span>other.<span class="number">0</span>);
             }
         }
     };
 }
 
-<span class="macro">impl_ordered_float_binop! </span>{Add, add, AddAssign, add_assign}
-<span class="macro">impl_ordered_float_binop! </span>{Sub, sub, SubAssign, sub_assign}
-<span class="macro">impl_ordered_float_binop! </span>{Mul, mul, MulAssign, mul_assign}
-<span class="macro">impl_ordered_float_binop! </span>{Div, div, DivAssign, div_assign}
-<span class="macro">impl_ordered_float_binop! </span>{Rem, rem, RemAssign, rem_assign}
+<span class="macro">impl_ordered_float_binop!</span> {Add, add, AddAssign, add_assign}
+<span class="macro">impl_ordered_float_binop!</span> {Sub, sub, SubAssign, sub_assign}
+<span class="macro">impl_ordered_float_binop!</span> {Mul, mul, MulAssign, mul_assign}
+<span class="macro">impl_ordered_float_binop!</span> {Div, div, DivAssign, div_assign}
+<span class="macro">impl_ordered_float_binop!</span> {Rem, rem, RemAssign, rem_assign}
 
-<span class="macro">macro_rules! </span>impl_ordered_float_pow {
+<span class="macro">macro_rules!</span> impl_ordered_float_pow {
     (<span class="macro-nonterminal">$inner</span>:ty, <span class="macro-nonterminal">$rhs</span>:ty) =&gt; {
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
         </span><span class="kw">impl </span>Pow&lt;<span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
@@ -3026,17 +3470,17 @@
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
                 OrderedFloat(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">*</span>rhs))
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;<span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;<span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
             </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs</span>) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
@@ -3044,34 +3488,34 @@
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'b </span>OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$inner</span>&gt; {
                 OrderedFloat(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">*</span>rhs))
             }
         }
     };
 }
 
-<span class="macro">impl_ordered_float_pow! </span>{f32, i8}
-<span class="macro">impl_ordered_float_pow! </span>{f32, i16}
-<span class="macro">impl_ordered_float_pow! </span>{f32, u8}
-<span class="macro">impl_ordered_float_pow! </span>{f32, u16}
-<span class="macro">impl_ordered_float_pow! </span>{f32, i32}
-<span class="macro">impl_ordered_float_pow! </span>{f64, i8}
-<span class="macro">impl_ordered_float_pow! </span>{f64, i16}
-<span class="macro">impl_ordered_float_pow! </span>{f64, u8}
-<span class="macro">impl_ordered_float_pow! </span>{f64, u16}
-<span class="macro">impl_ordered_float_pow! </span>{f64, i32}
-<span class="macro">impl_ordered_float_pow! </span>{f32, f32}
-<span class="macro">impl_ordered_float_pow! </span>{f64, f32}
-<span class="macro">impl_ordered_float_pow! </span>{f64, f64}
+<span class="macro">impl_ordered_float_pow!</span> {f32, i8}
+<span class="macro">impl_ordered_float_pow!</span> {f32, i16}
+<span class="macro">impl_ordered_float_pow!</span> {f32, u8}
+<span class="macro">impl_ordered_float_pow!</span> {f32, u16}
+<span class="macro">impl_ordered_float_pow!</span> {f32, i32}
+<span class="macro">impl_ordered_float_pow!</span> {f64, i8}
+<span class="macro">impl_ordered_float_pow!</span> {f64, i16}
+<span class="macro">impl_ordered_float_pow!</span> {f64, u8}
+<span class="macro">impl_ordered_float_pow!</span> {f64, u16}
+<span class="macro">impl_ordered_float_pow!</span> {f64, i32}
+<span class="macro">impl_ordered_float_pow!</span> {f32, f32}
+<span class="macro">impl_ordered_float_pow!</span> {f64, f32}
+<span class="macro">impl_ordered_float_pow!</span> {f64, f64}
 
-<span class="macro">macro_rules! </span>impl_ordered_float_self_pow {
+<span class="macro">macro_rules!</span> impl_ordered_float_self_pow {
     (<span class="macro-nonterminal">$base</span>:ty, <span class="macro-nonterminal">$exp</span>:ty) =&gt; {
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
         </span><span class="kw">impl </span>Pow&lt;OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
@@ -3080,17 +3524,17 @@
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
                 OrderedFloat(&lt;<span class="macro-nonterminal">$base</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, rhs.<span class="number">0</span>))
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
             </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
@@ -3098,49 +3542,49 @@
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'b </span>OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; OrderedFloat&lt;<span class="macro-nonterminal">$base</span>&gt; {
                 OrderedFloat(&lt;<span class="macro-nonterminal">$base</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, rhs.<span class="number">0</span>))
             }
         }
     };
 }
 
-<span class="macro">impl_ordered_float_self_pow! </span>{f32, f32}
-<span class="macro">impl_ordered_float_self_pow! </span>{f64, f32}
-<span class="macro">impl_ordered_float_self_pow! </span>{f64, f64}
+<span class="macro">impl_ordered_float_self_pow!</span> {f32, f32}
+<span class="macro">impl_ordered_float_self_pow!</span> {f64, f32}
+<span class="macro">impl_ordered_float_self_pow!</span> {f64, f64}
 
 <span class="doccomment">/// Adds a float directly.
-</span><span class="kw">impl</span>&lt;T: Float + Sum&gt; Sum <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore + Sum&gt; Sum <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="kw">fn </span>sum&lt;I: Iterator&lt;Item = OrderedFloat&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
         OrderedFloat(iter.map(|v| v.<span class="number">0</span>).sum())
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Float + Sum + <span class="lifetime">&#39;a</span>&gt; Sum&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: FloatCore + Sum + <span class="lifetime">'a</span>&gt; Sum&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>sum&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>sum&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
         iter.cloned().sum()
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + Product&gt; Product <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + Product&gt; Product <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="kw">fn </span>product&lt;I: Iterator&lt;Item = OrderedFloat&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
         OrderedFloat(iter.map(|v| v.<span class="number">0</span>).product())
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Float + Product + <span class="lifetime">&#39;a</span>&gt; Product&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: FloatCore + Product + <span class="lifetime">'a</span>&gt; Product&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>product&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>product&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
         iter.cloned().product()
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + Signed&gt; Signed <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + Signed&gt; Signed <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>abs(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.abs())
@@ -3184,9 +3628,9 @@
     /// ```
     /// use ordered_float::OrderedFloat;
     ///
-    /// assert!(&quot;-10&quot;.parse::&lt;OrderedFloat&lt;f32&gt;&gt;().is_ok());
-    /// assert!(&quot;abc&quot;.parse::&lt;OrderedFloat&lt;f32&gt;&gt;().is_err());
-    /// assert!(&quot;NaN&quot;.parse::&lt;OrderedFloat&lt;f32&gt;&gt;().is_ok());
+    /// assert!("-10".parse::&lt;OrderedFloat&lt;f32&gt;&gt;().is_ok());
+    /// assert!("abc".parse::&lt;OrderedFloat&lt;f32&gt;&gt;().is_err());
+    /// assert!("NaN".parse::&lt;OrderedFloat&lt;f32&gt;&gt;().is_ok());
     /// ```
     </span><span class="kw">fn </span>from_str(s: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
         T::from_str(s).map(OrderedFloat)
@@ -3202,11 +3646,11 @@
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; Neg <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>OrderedFloat&lt;T&gt;
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; Neg <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>OrderedFloat&lt;T&gt;
 <span class="kw">where
-    </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T: Neg,
+    </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>T: Neg,
 {
-    <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>T <span class="kw">as </span>Neg&gt;::Output&gt;;
+    <span class="kw">type </span>Output = OrderedFloat&lt;&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>T <span class="kw">as </span>Neg&gt;::Output&gt;;
 
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>neg(<span class="self">self</span>) -&gt; <span class="self">Self</span>::Output {
@@ -3240,7 +3684,7 @@
     }
 }
 
-<span class="macro">macro_rules! </span>impl_as_primitive {
+<span class="macro">macro_rules!</span> impl_as_primitive {
     (@ (NotNan&lt;<span class="macro-nonterminal">$T</span>: ty&gt;) =&gt; $(<span class="attr">#[<span class="macro-nonterminal">$cfg</span>:meta]</span>)* <span class="kw">impl </span>(NotNan&lt;<span class="macro-nonterminal">$U</span>: ty&gt;) ) =&gt; {
         $(<span class="attr">#[<span class="macro-nonterminal">$cfg</span>]</span>)*
         <span class="kw">impl </span>AsPrimitive&lt;NotNan&lt;<span class="macro-nonterminal">$U</span>&gt;&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$T</span>&gt; {
@@ -3399,7 +3843,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; num_traits::float::FloatCore <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; FloatCore <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="kw">fn </span>nan() -&gt; <span class="self">Self </span>{
         OrderedFloat(T::nan())
     }
@@ -3483,79 +3927,79 @@
     }
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl</span>&lt;T: Float&gt; Float <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+</span><span class="kw">impl</span>&lt;T: Float + FloatCore&gt; Float <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="kw">fn </span>nan() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::nan())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::nan())
     }
     <span class="kw">fn </span>infinity() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::infinity())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::infinity())
     }
     <span class="kw">fn </span>neg_infinity() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::neg_infinity())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::neg_infinity())
     }
     <span class="kw">fn </span>neg_zero() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::neg_zero())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::neg_zero())
     }
     <span class="kw">fn </span>min_value() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::min_value())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::min_value())
     }
     <span class="kw">fn </span>min_positive_value() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::min_positive_value())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::min_positive_value())
     }
     <span class="kw">fn </span>max_value() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::max_value())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::max_value())
     }
     <span class="kw">fn </span>is_nan(<span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.<span class="number">0</span>.is_nan()
+        Float::is_nan(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>is_infinite(<span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.<span class="number">0</span>.is_infinite()
+        Float::is_infinite(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>is_finite(<span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.<span class="number">0</span>.is_finite()
+        Float::is_finite(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>is_normal(<span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.<span class="number">0</span>.is_normal()
+        Float::is_normal(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>classify(<span class="self">self</span>) -&gt; FpCategory {
-        <span class="self">self</span>.<span class="number">0</span>.classify()
+        Float::classify(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>floor(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.floor())
+        OrderedFloat(Float::floor(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>ceil(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.ceil())
+        OrderedFloat(Float::ceil(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>round(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.round())
+        OrderedFloat(Float::round(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>trunc(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.trunc())
+        OrderedFloat(Float::trunc(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>fract(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.fract())
+        OrderedFloat(Float::fract(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>abs(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.abs())
+        OrderedFloat(Float::abs(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>signum(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.signum())
+        OrderedFloat(Float::signum(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>is_sign_positive(<span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.<span class="number">0</span>.is_sign_positive()
+        Float::is_sign_positive(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>is_sign_negative(<span class="self">self</span>) -&gt; bool {
-        <span class="self">self</span>.<span class="number">0</span>.is_sign_negative()
+        Float::is_sign_negative(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>mul_add(<span class="self">self</span>, a: <span class="self">Self</span>, b: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.mul_add(a.<span class="number">0</span>, b.<span class="number">0</span>))
     }
     <span class="kw">fn </span>recip(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.recip())
+        OrderedFloat(Float::recip(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>powi(<span class="self">self</span>, n: i32) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.powi(n))
+        OrderedFloat(Float::powi(<span class="self">self</span>.<span class="number">0</span>, n))
     }
     <span class="kw">fn </span>powf(<span class="self">self</span>, n: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.powf(n.<span class="number">0</span>))
@@ -3582,10 +4026,10 @@
         OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.log10())
     }
     <span class="kw">fn </span>max(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.max(other.<span class="number">0</span>))
+        OrderedFloat(Float::max(<span class="self">self</span>.<span class="number">0</span>, other.<span class="number">0</span>))
     }
     <span class="kw">fn </span>min(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.min(other.<span class="number">0</span>))
+        OrderedFloat(Float::min(<span class="self">self</span>.<span class="number">0</span>, other.<span class="number">0</span>))
     }
     <span class="kw">fn </span>abs_sub(<span class="self">self</span>, other: <span class="self">Self</span>) -&gt; <span class="self">Self </span>{
         OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.abs_sub(other.<span class="number">0</span>))
@@ -3646,20 +4090,20 @@
         OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.atanh())
     }
     <span class="kw">fn </span>integer_decode(<span class="self">self</span>) -&gt; (u64, i16, i8) {
-        <span class="self">self</span>.<span class="number">0</span>.integer_decode()
+        Float::integer_decode(<span class="self">self</span>.<span class="number">0</span>)
     }
     <span class="kw">fn </span>epsilon() -&gt; <span class="self">Self </span>{
-        OrderedFloat(T::epsilon())
+        OrderedFloat(&lt;T <span class="kw">as </span>Float&gt;::epsilon())
     }
     <span class="kw">fn </span>to_degrees(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.to_degrees())
+        OrderedFloat(Float::to_degrees(<span class="self">self</span>.<span class="number">0</span>))
     }
     <span class="kw">fn </span>to_radians(<span class="self">self</span>) -&gt; <span class="self">Self </span>{
-        OrderedFloat(<span class="self">self</span>.<span class="number">0</span>.to_radians())
+        OrderedFloat(Float::to_radians(<span class="self">self</span>.<span class="number">0</span>))
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + Num&gt; Num <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + Num&gt; Num <span class="kw">for </span>OrderedFloat&lt;T&gt; {
     <span class="kw">type </span>FromStrRadixErr = T::FromStrRadixErr;
     <span class="kw">fn </span>from_str_radix(str: <span class="kw-2">&amp;</span>str, radix: u32) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::FromStrRadixErr&gt; {
         T::from_str_radix(str, radix).map(OrderedFloat)
@@ -3687,12 +4131,17 @@
 /// ```
 /// # use ordered_float::NotNan;
 /// # use std::collections::HashSet;
-///
 /// let mut s: HashSet&lt;NotNan&lt;f32&gt;&gt; = HashSet::new();
 /// let key = NotNan::new(1.0).unwrap();
 /// s.insert(key);
 /// assert!(s.contains(&amp;key));
 /// ```
+///
+/// `-0.0` and `+0.0` are still considered equal. This different sign may show up in printing,
+/// or when dividing by zero (the sign of the zero becomes the sign of the resulting infinity).
+/// Therefore, `NotNan` may be unsuitable for use as a key in interning and memoization
+/// applications which require equal results from equal inputs, unless signed zeros make no
+/// difference or are canonicalized before insertion.
 ///
 /// Arithmetic on NotNan values will panic if it produces a NaN value:
 ///
@@ -3704,11 +4153,23 @@
 /// // This will panic:
 /// let c = a + b;
 /// ```
-</span><span class="attr">#[derive(PartialOrd, PartialEq, Debug, Default, Clone, Copy)]
+///
+/// # Representation
+///
+/// `NotNan` has `#[repr(transparent)]`, so it is sound to use
+/// [transmute](core::mem::transmute) or pointer casts to convert between any type `T` and
+/// `NotNan&lt;T&gt;`, as long as this does not create a NaN value.
+/// However, consider using [`bytemuck`] as a safe alternative if possible.
+///
+</span><span class="attr">#[cfg_attr(
+    not(feature = <span class="string">"bytemuck"</span>),
+    doc = <span class="string">"[`bytemuck`]: https://docs.rs/bytemuck/1/"
+</span>)]
+#[derive(PartialOrd, PartialEq, Default, Clone, Copy)]
 #[repr(transparent)]
 </span><span class="kw">pub struct </span>NotNan&lt;T&gt;(T);
 
-<span class="kw">impl</span>&lt;T: Float&gt; NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; NotNan&lt;T&gt; {
     <span class="doccomment">/// Create a `NotNan` value.
     ///
     /// Returns `Err` if `val` is NaN
@@ -3743,8 +4204,8 @@
     ///
     /// Behaviour is undefined if `val` is NaN
     </span><span class="attr">#[deprecated(
-        since = <span class="string">&quot;2.5.0&quot;</span>,
-        note = <span class="string">&quot;Please use the new_unchecked function instead.&quot;
+        since = <span class="string">"2.5.0"</span>,
+        note = <span class="string">"Please use the new_unchecked function instead."
     </span>)]
     #[inline]
     </span><span class="kw">pub const unsafe fn </span>unchecked_new(val: T) -&gt; <span class="self">Self </span>{
@@ -3752,7 +4213,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; AsRef&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; AsRef&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>as_ref(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>T {
         <span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0
@@ -3774,16 +4235,16 @@
 }
 
 <span class="attr">#[allow(clippy::derive_ord_xor_partial_ord)]
-</span><span class="kw">impl</span>&lt;T: Float&gt; Ord <span class="kw">for </span>NotNan&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore&gt; Ord <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">fn </span>cmp(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>NotNan&lt;T&gt;) -&gt; Ordering {
-        <span class="kw">match </span><span class="self">self</span>.partial_cmp(other) {
-            <span class="prelude-val">Some</span>(ord) =&gt; ord,
-            <span class="prelude-val">None </span>=&gt; <span class="kw">unsafe </span>{ unreachable_unchecked() },
-        }
+        <span class="comment">// Can't use unreachable_unchecked because unsafe code can't depend on FloatCore impl.
+        // https://github.com/reem/rust-ordered-float/issues/150
+        </span><span class="self">self</span>.partial_cmp(other)
+            .expect(<span class="string">"partial_cmp failed for non-NaN value"</span>)
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Hash <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Hash <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>hash&lt;H: Hasher&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, state: <span class="kw-2">&amp;mut </span>H) {
         <span class="kw">let </span>bits = raw_double_bits(<span class="kw-2">&amp;</span>canonicalize_signed_zero(<span class="self">self</span>.<span class="number">0</span>));
@@ -3791,7 +4252,14 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + fmt::Display&gt; fmt::Display <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: fmt::Debug&gt; fmt::Debug <span class="kw">for </span>NotNan&lt;T&gt; {
+    <span class="attr">#[inline]
+    </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
+        <span class="self">self</span>.<span class="number">0</span>.fmt(f)
+    }
+}
+
+<span class="kw">impl</span>&lt;T: FloatCore + fmt::Display&gt; fmt::Display <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         <span class="self">self</span>.<span class="number">0</span>.fmt(f)
@@ -3802,6 +4270,9 @@
     <span class="doccomment">/// Converts this [`NotNan`]`&lt;`[`f64`]`&gt;` to a [`NotNan`]`&lt;`[`f32`]`&gt;` while giving up on
     /// precision, [using `roundTiesToEven` as rounding mode, yielding `Infinity` on
     /// overflow](https://doc.rust-lang.org/reference/expressions/operator-expr.html#semantics).
+    ///
+    /// Note: For the reverse conversion (from `NotNan&lt;f32&gt;` to `NotNan&lt;f64&gt;`), you can use
+    /// `.into()`.
     </span><span class="kw">pub fn </span>as_f32(<span class="self">self</span>) -&gt; NotNan&lt;f32&gt; {
         <span class="comment">// This is not destroying invariants, as it is a pure rounding operation. The only two special
         // cases are where f32 would be overflowing, then the operation yields Infinity, or where
@@ -3840,7 +4311,7 @@
     }
 }
 
-<span class="macro">macro_rules! </span>impl_from_int_primitive {
+<span class="macro">macro_rules!</span> impl_from_int_primitive {
     (<span class="macro-nonterminal">$primitive</span>:ty, <span class="macro-nonterminal">$inner</span>:ty) =&gt; {
         <span class="kw">impl </span>From&lt;<span class="macro-nonterminal">$primitive</span>&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">fn </span>from(source: <span class="macro-nonterminal">$primitive</span>) -&gt; <span class="self">Self </span>{
@@ -3871,7 +4342,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Deref <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Deref <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Target = T;
 
     <span class="attr">#[inline]
@@ -3880,9 +4351,9 @@
     </span>}
 }
 
-<span class="kw">impl</span>&lt;T: Float + PartialEq&gt; Eq <span class="kw">for </span>NotNan&lt;T&gt; {}
+<span class="kw">impl</span>&lt;T: FloatCore + PartialEq&gt; Eq <span class="kw">for </span>NotNan&lt;T&gt; {}
 
-<span class="kw">impl</span>&lt;T: Float&gt; PartialEq&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; PartialEq&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>T) -&gt; bool {
         <span class="self">self</span>.<span class="number">0 </span>== <span class="kw-2">*</span>other
@@ -3892,27 +4363,27 @@
 <span class="doccomment">/// Adds a float directly.
 ///
 /// Panics if the provided value is NaN or the computation results in NaN
-</span><span class="kw">impl</span>&lt;T: Float&gt; Add&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore&gt; Add&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>add(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
-        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>+ other).expect(<span class="string">&quot;Addition resulted in NaN&quot;</span>)
+        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>+ other).expect(<span class="string">"Addition resulted in NaN"</span>)
     }
 }
 
 <span class="doccomment">/// Adds a float directly.
 ///
 /// Panics if the provided value is NaN.
-</span><span class="kw">impl</span>&lt;T: Float + Sum&gt; Sum <span class="kw">for </span>NotNan&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore + Sum&gt; Sum <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">fn </span>sum&lt;I: Iterator&lt;Item = NotNan&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
-        NotNan::new(iter.map(|v| v.<span class="number">0</span>).sum()).expect(<span class="string">&quot;Sum resulted in NaN&quot;</span>)
+        NotNan::new(iter.map(|v| v.<span class="number">0</span>).sum()).expect(<span class="string">"Sum resulted in NaN"</span>)
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Float + Sum + <span class="lifetime">&#39;a</span>&gt; Sum&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;T&gt;&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: FloatCore + Sum + <span class="lifetime">'a</span>&gt; Sum&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;T&gt;&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>sum&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>sum&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
         iter.cloned().sum()
     }
 }
@@ -3920,36 +4391,36 @@
 <span class="doccomment">/// Subtracts a float directly.
 ///
 /// Panics if the provided value is NaN or the computation results in NaN
-</span><span class="kw">impl</span>&lt;T: Float&gt; Sub&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore&gt; Sub&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>sub(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
-        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>- other).expect(<span class="string">&quot;Subtraction resulted in NaN&quot;</span>)
+        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>- other).expect(<span class="string">"Subtraction resulted in NaN"</span>)
     }
 }
 
 <span class="doccomment">/// Multiplies a float directly.
 ///
 /// Panics if the provided value is NaN or the computation results in NaN
-</span><span class="kw">impl</span>&lt;T: Float&gt; Mul&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore&gt; Mul&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>mul(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
-        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>* other).expect(<span class="string">&quot;Multiplication resulted in NaN&quot;</span>)
+        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>* other).expect(<span class="string">"Multiplication resulted in NaN"</span>)
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + Product&gt; Product <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + Product&gt; Product <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">fn </span>product&lt;I: Iterator&lt;Item = NotNan&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
-        NotNan::new(iter.map(|v| v.<span class="number">0</span>).product()).expect(<span class="string">&quot;Product resulted in NaN&quot;</span>)
+        NotNan::new(iter.map(|v| v.<span class="number">0</span>).product()).expect(<span class="string">"Product resulted in NaN"</span>)
     }
 }
 
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Float + Product + <span class="lifetime">&#39;a</span>&gt; Product&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;T&gt;&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: FloatCore + Product + <span class="lifetime">'a</span>&gt; Product&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;T&gt;&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
-    </span><span class="kw">fn </span>product&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
+    </span><span class="kw">fn </span>product&lt;I: Iterator&lt;Item = <span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;T&gt;&gt;&gt;(iter: I) -&gt; <span class="self">Self </span>{
         iter.cloned().product()
     }
 }
@@ -3957,30 +4428,30 @@
 <span class="doccomment">/// Divides a float directly.
 ///
 /// Panics if the provided value is NaN or the computation results in NaN
-</span><span class="kw">impl</span>&lt;T: Float&gt; Div&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore&gt; Div&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>div(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
-        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>/ other).expect(<span class="string">&quot;Division resulted in NaN&quot;</span>)
+        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>/ other).expect(<span class="string">"Division resulted in NaN"</span>)
     }
 }
 
 <span class="doccomment">/// Calculates `%` with a float directly.
 ///
 /// Panics if the provided value is NaN or the computation results in NaN
-</span><span class="kw">impl</span>&lt;T: Float&gt; Rem&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+</span><span class="kw">impl</span>&lt;T: FloatCore&gt; Rem&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>rem(<span class="self">self</span>, other: T) -&gt; <span class="self">Self </span>{
-        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>% other).expect(<span class="string">&quot;Rem resulted in NaN&quot;</span>)
+        NotNan::new(<span class="self">self</span>.<span class="number">0 </span>% other).expect(<span class="string">"Rem resulted in NaN"</span>)
     }
 }
 
-<span class="macro">macro_rules! </span>impl_not_nan_binop {
+<span class="macro">macro_rules!</span> impl_not_nan_binop {
     (<span class="macro-nonterminal">$imp</span>:ident, <span class="macro-nonterminal">$method</span>:ident, <span class="macro-nonterminal">$assign_imp</span>:ident, <span class="macro-nonterminal">$assign_method</span>:ident) =&gt; {
-        <span class="kw">impl</span>&lt;T: Float&gt; <span class="macro-nonterminal">$imp </span><span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore&gt; <span class="macro-nonterminal">$imp </span><span class="kw">for </span>NotNan&lt;T&gt; {
             <span class="kw">type </span>Output = <span class="self">Self</span>;
 
             <span class="attr">#[inline]
@@ -3989,7 +4460,7 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span>T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span>T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
             <span class="kw">type </span>Output = NotNan&lt;T&gt;;
 
             <span class="attr">#[inline]
@@ -3998,7 +4469,7 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="self">Self</span>&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span><span class="self">Self</span>&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
             <span class="kw">type </span>Output = NotNan&lt;T&gt;;
 
             <span class="attr">#[inline]
@@ -4007,7 +4478,7 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float&gt; <span class="macro-nonterminal">$imp </span><span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore&gt; <span class="macro-nonterminal">$imp </span><span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
             <span class="kw">type </span>Output = NotNan&lt;T&gt;;
 
             <span class="attr">#[inline]
@@ -4016,7 +4487,7 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float&gt; <span class="macro-nonterminal">$imp</span>&lt;NotNan&lt;T&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore&gt; <span class="macro-nonterminal">$imp</span>&lt;NotNan&lt;T&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
             <span class="kw">type </span>Output = NotNan&lt;T&gt;;
 
             <span class="attr">#[inline]
@@ -4025,7 +4496,7 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float&gt; <span class="macro-nonterminal">$imp</span>&lt;T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore&gt; <span class="macro-nonterminal">$imp</span>&lt;T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
             <span class="kw">type </span>Output = NotNan&lt;T&gt;;
 
             <span class="attr">#[inline]
@@ -4034,7 +4505,7 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore&gt; <span class="macro-nonterminal">$imp</span>&lt;<span class="kw-2">&amp;</span>T&gt; <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
             <span class="kw">type </span>Output = NotNan&lt;T&gt;;
 
             <span class="attr">#[inline]
@@ -4043,28 +4514,28 @@
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
             <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: T) {
                 <span class="kw-2">*</span><span class="self">self </span>= (<span class="kw-2">*</span><span class="self">self</span>).<span class="macro-nonterminal">$method</span>(other);
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span>T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span>T&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
             <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>T) {
                 <span class="kw-2">*</span><span class="self">self </span>= (<span class="kw-2">*</span><span class="self">self</span>).<span class="macro-nonterminal">$method</span>(<span class="kw-2">*</span>other);
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp </span><span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp </span><span class="kw">for </span>NotNan&lt;T&gt; {
             <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="self">Self</span>) {
                 (<span class="kw-2">*</span><span class="self">self</span>).<span class="macro-nonterminal">$assign_method</span>(other.<span class="number">0</span>);
             }
         }
 
-        <span class="kw">impl</span>&lt;T: Float + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="self">Self</span>&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">impl</span>&lt;T: FloatCore + <span class="macro-nonterminal">$assign_imp</span>&gt; <span class="macro-nonterminal">$assign_imp</span>&lt;<span class="kw-2">&amp;</span><span class="self">Self</span>&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
             <span class="attr">#[inline]
             </span><span class="kw">fn </span><span class="macro-nonterminal">$assign_method</span>(<span class="kw-2">&amp;mut </span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) {
                 (<span class="kw-2">*</span><span class="self">self</span>).<span class="macro-nonterminal">$assign_method</span>(other.<span class="number">0</span>);
@@ -4073,113 +4544,113 @@
     };
 }
 
-<span class="macro">impl_not_nan_binop! </span>{Add, add, AddAssign, add_assign}
-<span class="macro">impl_not_nan_binop! </span>{Sub, sub, SubAssign, sub_assign}
-<span class="macro">impl_not_nan_binop! </span>{Mul, mul, MulAssign, mul_assign}
-<span class="macro">impl_not_nan_binop! </span>{Div, div, DivAssign, div_assign}
-<span class="macro">impl_not_nan_binop! </span>{Rem, rem, RemAssign, rem_assign}
+<span class="macro">impl_not_nan_binop!</span> {Add, add, AddAssign, add_assign}
+<span class="macro">impl_not_nan_binop!</span> {Sub, sub, SubAssign, sub_assign}
+<span class="macro">impl_not_nan_binop!</span> {Mul, mul, MulAssign, mul_assign}
+<span class="macro">impl_not_nan_binop!</span> {Div, div, DivAssign, div_assign}
+<span class="macro">impl_not_nan_binop!</span> {Rem, rem, RemAssign, rem_assign}
 
 <span class="comment">// Will panic if NaN value is return from the operation
-</span><span class="macro">macro_rules! </span>impl_not_nan_pow {
+</span><span class="macro">macro_rules!</span> impl_not_nan_pow {
     (<span class="macro-nonterminal">$inner</span>:ty, <span class="macro-nonterminal">$rhs</span>:ty) =&gt; {
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
         </span><span class="kw">impl </span>Pow&lt;<span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
             </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs</span>) -&gt; NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
-                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, rhs)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, rhs)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>) -&gt; NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
-                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">*</span>rhs)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>) -&gt; NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">*</span>rhs)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;<span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;<span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
             </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="macro-nonterminal">$rhs</span>) -&gt; NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
-                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, rhs)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, rhs)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'b </span>NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="macro-nonterminal">$rhs</span>) -&gt; NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
-                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">*</span>rhs)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="macro-nonterminal">$rhs</span>) -&gt; NotNan&lt;<span class="macro-nonterminal">$inner</span>&gt; {
+                NotNan::new(&lt;<span class="macro-nonterminal">$inner</span>&gt;::pow(<span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">*</span>rhs)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
     };
 }
 
-<span class="macro">impl_not_nan_pow! </span>{f32, i8}
-<span class="macro">impl_not_nan_pow! </span>{f32, i16}
-<span class="macro">impl_not_nan_pow! </span>{f32, u8}
-<span class="macro">impl_not_nan_pow! </span>{f32, u16}
-<span class="macro">impl_not_nan_pow! </span>{f32, i32}
-<span class="macro">impl_not_nan_pow! </span>{f64, i8}
-<span class="macro">impl_not_nan_pow! </span>{f64, i16}
-<span class="macro">impl_not_nan_pow! </span>{f64, u8}
-<span class="macro">impl_not_nan_pow! </span>{f64, u16}
-<span class="macro">impl_not_nan_pow! </span>{f64, i32}
-<span class="macro">impl_not_nan_pow! </span>{f32, f32}
-<span class="macro">impl_not_nan_pow! </span>{f64, f32}
-<span class="macro">impl_not_nan_pow! </span>{f64, f64}
+<span class="macro">impl_not_nan_pow!</span> {f32, i8}
+<span class="macro">impl_not_nan_pow!</span> {f32, i16}
+<span class="macro">impl_not_nan_pow!</span> {f32, u8}
+<span class="macro">impl_not_nan_pow!</span> {f32, u16}
+<span class="macro">impl_not_nan_pow!</span> {f32, i32}
+<span class="macro">impl_not_nan_pow!</span> {f64, i8}
+<span class="macro">impl_not_nan_pow!</span> {f64, i16}
+<span class="macro">impl_not_nan_pow!</span> {f64, u8}
+<span class="macro">impl_not_nan_pow!</span> {f64, u16}
+<span class="macro">impl_not_nan_pow!</span> {f64, i32}
+<span class="macro">impl_not_nan_pow!</span> {f32, f32}
+<span class="macro">impl_not_nan_pow!</span> {f64, f32}
+<span class="macro">impl_not_nan_pow!</span> {f64, f64}
 
 <span class="comment">// This also should panic on NaN
-</span><span class="macro">macro_rules! </span>impl_not_nan_self_pow {
+</span><span class="macro">macro_rules!</span> impl_not_nan_self_pow {
     (<span class="macro-nonterminal">$base</span>:ty, <span class="macro-nonterminal">$exp</span>:ty) =&gt; {
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
         </span><span class="kw">impl </span>Pow&lt;NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
             </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
-                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
-                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
+                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Pow&lt;NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Pow&lt;NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
             </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
-                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
 
-        <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-        </span><span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, <span class="lifetime">&#39;b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">&#39;b </span>NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
+        <span class="attr">#[cfg(any(feature = <span class="string">"std"</span>, feature = <span class="string">"libm"</span>))]
+        </span><span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, <span class="lifetime">'b</span>&gt; Pow&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;&gt; <span class="kw">for </span><span class="kw-2">&amp;</span><span class="lifetime">'b </span>NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
             <span class="kw">type </span>Output = NotNan&lt;<span class="macro-nonterminal">$base</span>&gt;;
             <span class="attr">#[inline]
-            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
-                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">&quot;Pow resulted in NaN&quot;</span>)
+            </span><span class="kw">fn </span>pow(<span class="self">self</span>, rhs: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>NotNan&lt;<span class="macro-nonterminal">$exp</span>&gt;) -&gt; NotNan&lt;<span class="macro-nonterminal">$base</span>&gt; {
+                NotNan::new(<span class="self">self</span>.<span class="number">0</span>.pow(rhs.<span class="number">0</span>)).expect(<span class="string">"Pow resulted in NaN"</span>)
             }
         }
     };
 }
 
-<span class="macro">impl_not_nan_self_pow! </span>{f32, f32}
-<span class="macro">impl_not_nan_self_pow! </span>{f64, f32}
-<span class="macro">impl_not_nan_self_pow! </span>{f64, f64}
+<span class="macro">impl_not_nan_self_pow!</span> {f32, f32}
+<span class="macro">impl_not_nan_self_pow!</span> {f64, f32}
+<span class="macro">impl_not_nan_self_pow!</span> {f64, f64}
 
-<span class="kw">impl</span>&lt;T: Float&gt; Neg <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Neg <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Output = <span class="self">Self</span>;
 
     <span class="attr">#[inline]
@@ -4188,7 +4659,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Neg <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Neg <span class="kw">for </span><span class="kw-2">&amp;</span>NotNan&lt;T&gt; {
     <span class="kw">type </span>Output = NotNan&lt;T&gt;;
 
     <span class="attr">#[inline]
@@ -4201,20 +4672,20 @@
 </span><span class="attr">#[derive(Copy, Clone, PartialEq, Eq, Debug)]
 </span><span class="kw">pub struct </span>FloatIsNan;
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"std"</span>)]
 </span><span class="kw">impl </span>Error <span class="kw">for </span>FloatIsNan {
     <span class="kw">fn </span>description(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
-        <span class="string">&quot;NotNan constructed with NaN&quot;
+        <span class="string">"NotNan constructed with NaN"
     </span>}
 }
 
 <span class="kw">impl </span>fmt::Display <span class="kw">for </span>FloatIsNan {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
-        <span class="macro">write!</span>(f, <span class="string">&quot;NotNan constructed with NaN&quot;</span>)
+        <span class="macro">write!</span>(f, <span class="string">"NotNan constructed with NaN"</span>)
     }
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"std"</span>)]
 </span><span class="kw">impl </span>From&lt;FloatIsNan&gt; <span class="kw">for </span>std::io::Error {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>from(e: FloatIsNan) -&gt; std::io::Error {
@@ -4224,14 +4695,14 @@
 
 <span class="attr">#[inline]
 </span><span class="doccomment">/// Used for hashing. Input must not be zero or NaN.
-</span><span class="kw">fn </span>raw_double_bits&lt;F: Float&gt;(f: <span class="kw-2">&amp;</span>F) -&gt; u64 {
+</span><span class="kw">fn </span>raw_double_bits&lt;F: FloatCore&gt;(f: <span class="kw-2">&amp;</span>F) -&gt; u64 {
     <span class="kw">let </span>(man, exp, sign) = f.integer_decode();
     <span class="kw">let </span>exp_u64 = exp <span class="kw">as </span>u16 <span class="kw">as </span>u64;
     <span class="kw">let </span>sign_u64 = (sign &gt; <span class="number">0</span>) <span class="kw">as </span>u64;
     (man &amp; MAN_MASK) | ((exp_u64 &lt;&lt; <span class="number">52</span>) &amp; EXP_MASK) | ((sign_u64 &lt;&lt; <span class="number">63</span>) &amp; SIGN_MASK)
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Zero <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Zero <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>zero() -&gt; <span class="self">Self </span>{
         NotNan(T::zero())
@@ -4243,14 +4714,14 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; One <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; One <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>one() -&gt; <span class="self">Self </span>{
         NotNan(T::one())
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Bounded <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Bounded <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>min_value() -&gt; <span class="self">Self </span>{
         NotNan(T::min_value())
@@ -4262,7 +4733,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + FromStr&gt; FromStr <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + FromStr&gt; FromStr <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span><span class="prelude-val">Err </span>= ParseNotNanError&lt;T::Err&gt;;
 
     <span class="doccomment">/// Convert a &amp;str to `NotNan`. Returns an error if the string fails to parse,
@@ -4271,9 +4742,9 @@
     /// ```
     /// use ordered_float::NotNan;
     ///
-    /// assert!(&quot;-10&quot;.parse::&lt;NotNan&lt;f32&gt;&gt;().is_ok());
-    /// assert!(&quot;abc&quot;.parse::&lt;NotNan&lt;f32&gt;&gt;().is_err());
-    /// assert!(&quot;NaN&quot;.parse::&lt;NotNan&lt;f32&gt;&gt;().is_err());
+    /// assert!("-10".parse::&lt;NotNan&lt;f32&gt;&gt;().is_ok());
+    /// assert!("abc".parse::&lt;NotNan&lt;f32&gt;&gt;().is_err());
+    /// assert!("NaN".parse::&lt;NotNan&lt;f32&gt;&gt;().is_err());
     /// ```
     </span><span class="kw">fn </span>from_str(src: <span class="kw-2">&amp;</span>str) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::Err&gt; {
         src.parse()
@@ -4282,7 +4753,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + FromPrimitive&gt; FromPrimitive <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + FromPrimitive&gt; FromPrimitive <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">fn </span>from_i64(n: i64) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
         T::from_i64(n).and_then(|n| NotNan::new(n).ok())
     }
@@ -4322,7 +4793,7 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; ToPrimitive <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; ToPrimitive <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">fn </span>to_i64(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;i64&gt; {
         <span class="self">self</span>.<span class="number">0</span>.to_i64()
     }
@@ -4371,13 +4842,13 @@
     </span>IsNaN,
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-</span><span class="kw">impl</span>&lt;E: fmt::Debug + Error + <span class="lifetime">&#39;static</span>&gt; Error <span class="kw">for </span>ParseNotNanError&lt;E&gt; {
+<span class="attr">#[cfg(feature = <span class="string">"std"</span>)]
+</span><span class="kw">impl</span>&lt;E: fmt::Debug + Error + <span class="lifetime">'static</span>&gt; Error <span class="kw">for </span>ParseNotNanError&lt;E&gt; {
     <span class="kw">fn </span>description(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>str {
-        <span class="string">&quot;Error parsing a not-NaN floating point value&quot;
+        <span class="string">"Error parsing a not-NaN floating point value"
     </span>}
 
-    <span class="kw">fn </span>source(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Error + <span class="lifetime">&#39;static</span>)&gt; {
+    <span class="kw">fn </span>source(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="kw-2">&amp;</span>(<span class="kw">dyn </span>Error + <span class="lifetime">'static</span>)&gt; {
         <span class="kw">match </span><span class="self">self </span>{
             ParseNotNanError::ParseFloatError(e) =&gt; <span class="prelude-val">Some</span>(e),
             ParseNotNanError::IsNaN =&gt; <span class="prelude-val">None</span>,
@@ -4388,13 +4859,13 @@
 <span class="kw">impl</span>&lt;E: fmt::Display&gt; fmt::Display <span class="kw">for </span>ParseNotNanError&lt;E&gt; {
     <span class="kw">fn </span>fmt(<span class="kw-2">&amp;</span><span class="self">self</span>, f: <span class="kw-2">&amp;mut </span>fmt::Formatter) -&gt; fmt::Result {
         <span class="kw">match </span><span class="self">self </span>{
-            ParseNotNanError::ParseFloatError(e) =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;Parse error: {}&quot;</span>, e),
-            ParseNotNanError::IsNaN =&gt; <span class="macro">write!</span>(f, <span class="string">&quot;NotNan parser encounter a NaN&quot;</span>),
+            ParseNotNanError::ParseFloatError(e) =&gt; <span class="macro">write!</span>(f, <span class="string">"Parse error: {}"</span>, e),
+            ParseNotNanError::IsNaN =&gt; <span class="macro">write!</span>(f, <span class="string">"NotNan parser encounter a NaN"</span>),
         }
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; Num <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; Num <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">type </span>FromStrRadixErr = ParseNotNanError&lt;T::FromStrRadixErr&gt;;
 
     <span class="kw">fn </span>from_str_radix(src: <span class="kw-2">&amp;</span>str, radix: u32) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, <span class="self">Self</span>::FromStrRadixErr&gt; {
@@ -4404,14 +4875,14 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float + Signed&gt; Signed <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore + Signed&gt; Signed <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="attr">#[inline]
     </span><span class="kw">fn </span>abs(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="self">Self </span>{
         NotNan(<span class="self">self</span>.<span class="number">0</span>.abs())
     }
 
     <span class="kw">fn </span>abs_sub(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; <span class="self">Self </span>{
-        NotNan::new(Signed::abs_sub(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">&amp;</span>other.<span class="number">0</span>)).expect(<span class="string">&quot;Subtraction resulted in NaN&quot;</span>)
+        NotNan::new(Signed::abs_sub(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>, <span class="kw-2">&amp;</span>other.<span class="number">0</span>)).expect(<span class="string">"Subtraction resulted in NaN"</span>)
     }
 
     <span class="attr">#[inline]
@@ -4428,13 +4899,13 @@
     }
 }
 
-<span class="kw">impl</span>&lt;T: Float&gt; NumCast <span class="kw">for </span>NotNan&lt;T&gt; {
+<span class="kw">impl</span>&lt;T: FloatCore&gt; NumCast <span class="kw">for </span>NotNan&lt;T&gt; {
     <span class="kw">fn </span>from&lt;F: ToPrimitive&gt;(n: F) -&gt; <span class="prelude-ty">Option</span>&lt;<span class="self">Self</span>&gt; {
         T::from(n).and_then(|n| NotNan::new(n).ok())
     }
 }
 
-<span class="macro">macro_rules! </span>impl_float_const_method {
+<span class="macro">macro_rules!</span> impl_float_const_method {
     (<span class="macro-nonterminal">$wrapper</span>:expr, <span class="macro-nonterminal">$method</span>:ident) =&gt; {
         <span class="attr">#[allow(non_snake_case)]
         #[allow(clippy::redundant_closure_call)]
@@ -4444,7 +4915,7 @@
     };
 }
 
-<span class="macro">macro_rules! </span>impl_float_const {
+<span class="macro">macro_rules!</span> impl_float_const {
     (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ident</span>, <span class="macro-nonterminal">$wrapper</span>:expr) =&gt; {
         <span class="kw">impl</span>&lt;T: FloatConst&gt; FloatConst <span class="kw">for </span><span class="macro-nonterminal">$</span><span class="kw">type</span>&lt;<span class="macro-nonterminal">T</span>&gt; {
             <span class="macro">impl_float_const_method!</span>(<span class="macro-nonterminal">$wrapper</span>, E);
@@ -4471,49 +4942,46 @@
 <span class="comment">// Float constants are not NaN.
 </span><span class="macro">impl_float_const!</span>(NotNan, |x| <span class="kw">unsafe </span>{ NotNan::new_unchecked(x) });
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;serde&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"serde"</span>)]
 </span><span class="kw">mod </span>impl_serde {
     <span class="kw">extern crate </span>serde;
     <span class="kw">use </span><span class="self">self</span>::serde::de::{Error, Unexpected};
     <span class="kw">use </span><span class="self">self</span>::serde::{Deserialize, Deserializer, Serialize, Serializer};
     <span class="kw">use super</span>::{NotNan, OrderedFloat};
     <span class="kw">use </span>core::f64;
-    <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-    </span><span class="kw">use </span>num_traits::float::FloatCore <span class="kw">as </span>Float;
-    <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-    </span><span class="kw">use </span>num_traits::Float;
+    <span class="kw">use </span>num_traits::float::FloatCore;
 
     <span class="attr">#[cfg(test)]
     </span><span class="kw">extern crate </span>serde_test;
     <span class="attr">#[cfg(test)]
     </span><span class="kw">use </span><span class="self">self</span>::serde_test::{assert_de_tokens_error, assert_tokens, Token};
 
-    <span class="kw">impl</span>&lt;T: Float + Serialize&gt; Serialize <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+    <span class="kw">impl</span>&lt;T: FloatCore + Serialize&gt; Serialize <span class="kw">for </span>OrderedFloat&lt;T&gt; {
         <span class="attr">#[inline]
         </span><span class="kw">fn </span>serialize&lt;S: Serializer&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, s: S) -&gt; <span class="prelude-ty">Result</span>&lt;S::Ok, S::Error&gt; {
             <span class="self">self</span>.<span class="number">0</span>.serialize(s)
         }
     }
 
-    <span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, T: Float + Deserialize&lt;<span class="lifetime">&#39;de</span>&gt;&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+    <span class="kw">impl</span>&lt;<span class="lifetime">'de</span>, T: FloatCore + Deserialize&lt;<span class="lifetime">'de</span>&gt;&gt; Deserialize&lt;<span class="lifetime">'de</span>&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
         <span class="attr">#[inline]
-        </span><span class="kw">fn </span>deserialize&lt;D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;&gt;(d: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, D::Error&gt; {
+        </span><span class="kw">fn </span>deserialize&lt;D: Deserializer&lt;<span class="lifetime">'de</span>&gt;&gt;(d: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, D::Error&gt; {
             T::deserialize(d).map(OrderedFloat)
         }
     }
 
-    <span class="kw">impl</span>&lt;T: Float + Serialize&gt; Serialize <span class="kw">for </span>NotNan&lt;T&gt; {
+    <span class="kw">impl</span>&lt;T: FloatCore + Serialize&gt; Serialize <span class="kw">for </span>NotNan&lt;T&gt; {
         <span class="attr">#[inline]
         </span><span class="kw">fn </span>serialize&lt;S: Serializer&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, s: S) -&gt; <span class="prelude-ty">Result</span>&lt;S::Ok, S::Error&gt; {
             <span class="self">self</span>.<span class="number">0</span>.serialize(s)
         }
     }
 
-    <span class="kw">impl</span>&lt;<span class="lifetime">&#39;de</span>, T: Float + Deserialize&lt;<span class="lifetime">&#39;de</span>&gt;&gt; Deserialize&lt;<span class="lifetime">&#39;de</span>&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
-        <span class="kw">fn </span>deserialize&lt;D: Deserializer&lt;<span class="lifetime">&#39;de</span>&gt;&gt;(d: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, D::Error&gt; {
+    <span class="kw">impl</span>&lt;<span class="lifetime">'de</span>, T: FloatCore + Deserialize&lt;<span class="lifetime">'de</span>&gt;&gt; Deserialize&lt;<span class="lifetime">'de</span>&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+        <span class="kw">fn </span>deserialize&lt;D: Deserializer&lt;<span class="lifetime">'de</span>&gt;&gt;(d: D) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, D::Error&gt; {
             <span class="kw">let </span>float = T::deserialize(d)<span class="question-mark">?</span>;
             NotNan::new(float).map_err(|<span class="kw">_</span>| {
-                Error::invalid_value(Unexpected::Float(f64::NAN), <span class="kw-2">&amp;</span><span class="string">&quot;float (but not NaN)&quot;</span>)
+                Error::invalid_value(Unexpected::Float(f64::NAN), <span class="kw-2">&amp;</span><span class="string">"float (but not NaN)"</span>)
             })
         }
     }
@@ -4534,18 +5002,15 @@
     </span><span class="kw">fn </span>test_fail_on_nan() {
         assert_de_tokens_error::&lt;NotNan&lt;f64&gt;&gt;(
             <span class="kw-2">&amp;</span>[Token::F64(f64::NAN)],
-            <span class="string">&quot;invalid value: floating point `NaN`, expected float (but not NaN)&quot;</span>,
+            <span class="string">"invalid value: floating point `NaN`, expected float (but not NaN)"</span>,
         );
     }
 }
 
-<span class="attr">#[cfg(any(feature = <span class="string">&quot;rkyv_16&quot;</span>, feature = <span class="string">&quot;rkyv_32&quot;</span>, feature = <span class="string">&quot;rkyv_64&quot;</span>))]
+<span class="attr">#[cfg(any(feature = <span class="string">"rkyv_16"</span>, feature = <span class="string">"rkyv_32"</span>, feature = <span class="string">"rkyv_64"</span>))]
 </span><span class="kw">mod </span>impl_rkyv {
     <span class="kw">use super</span>::{NotNan, OrderedFloat};
-    <span class="attr">#[cfg(not(feature = <span class="string">&quot;std&quot;</span>))]
-    </span><span class="kw">use </span>num_traits::float::FloatCore <span class="kw">as </span>Float;
-    <span class="attr">#[cfg(feature = <span class="string">&quot;std&quot;</span>)]
-    </span><span class="kw">use </span>num_traits::Float;
+    <span class="kw">use </span>num_traits::float::FloatCore;
     <span class="attr">#[cfg(test)]
     </span><span class="kw">use </span>rkyv::{archived_root, ser::Serializer};
     <span class="kw">use </span>rkyv::{Archive, Deserialize, Fallible, Serialize};
@@ -4555,7 +5020,7 @@
     <span class="attr">#[cfg(test)]
     </span><span class="kw">type </span>DefaultDeserializer = rkyv::Infallible;
 
-    <span class="kw">impl</span>&lt;T: Float + Archive&gt; Archive <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+    <span class="kw">impl</span>&lt;T: FloatCore + Archive&gt; Archive <span class="kw">for </span>OrderedFloat&lt;T&gt; {
         <span class="kw">type </span>Archived = OrderedFloat&lt;T::Archived&gt;;
 
         <span class="kw">type </span>Resolver = T::Resolver;
@@ -4565,13 +5030,13 @@
         }
     }
 
-    <span class="kw">impl</span>&lt;T: Float + Serialize&lt;S&gt;, S: Fallible + <span class="question-mark">?</span>Sized&gt; Serialize&lt;S&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+    <span class="kw">impl</span>&lt;T: FloatCore + Serialize&lt;S&gt;, S: Fallible + <span class="question-mark">?</span>Sized&gt; Serialize&lt;S&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
         <span class="kw">fn </span>serialize(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="kw-2">&amp;mut </span>S) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Resolver, S::Error&gt; {
             <span class="self">self</span>.<span class="number">0</span>.serialize(s)
         }
     }
 
-    <span class="kw">impl</span>&lt;T: Float, AT: Deserialize&lt;T, D&gt;, D: Fallible + <span class="question-mark">?</span>Sized&gt; Deserialize&lt;OrderedFloat&lt;T&gt;, D&gt;
+    <span class="kw">impl</span>&lt;T: FloatCore, AT: Deserialize&lt;T, D&gt;, D: Fallible + <span class="question-mark">?</span>Sized&gt; Deserialize&lt;OrderedFloat&lt;T&gt;, D&gt;
         <span class="kw">for </span>OrderedFloat&lt;AT&gt;
     {
         <span class="kw">fn </span>deserialize(<span class="kw-2">&amp;</span><span class="self">self</span>, d: <span class="kw-2">&amp;mut </span>D) -&gt; <span class="prelude-ty">Result</span>&lt;OrderedFloat&lt;T&gt;, D::Error&gt; {
@@ -4579,7 +5044,7 @@
         }
     }
 
-    <span class="kw">impl</span>&lt;T: Float + Archive&gt; Archive <span class="kw">for </span>NotNan&lt;T&gt; {
+    <span class="kw">impl</span>&lt;T: FloatCore + Archive&gt; Archive <span class="kw">for </span>NotNan&lt;T&gt; {
         <span class="kw">type </span>Archived = NotNan&lt;T::Archived&gt;;
 
         <span class="kw">type </span>Resolver = T::Resolver;
@@ -4589,13 +5054,13 @@
         }
     }
 
-    <span class="kw">impl</span>&lt;T: Float + Serialize&lt;S&gt;, S: Fallible + <span class="question-mark">?</span>Sized&gt; Serialize&lt;S&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+    <span class="kw">impl</span>&lt;T: FloatCore + Serialize&lt;S&gt;, S: Fallible + <span class="question-mark">?</span>Sized&gt; Serialize&lt;S&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
         <span class="kw">fn </span>serialize(<span class="kw-2">&amp;</span><span class="self">self</span>, s: <span class="kw-2">&amp;mut </span>S) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>::Resolver, S::Error&gt; {
             <span class="self">self</span>.<span class="number">0</span>.serialize(s)
         }
     }
 
-    <span class="kw">impl</span>&lt;T: Float, AT: Deserialize&lt;T, D&gt;, D: Fallible + <span class="question-mark">?</span>Sized&gt; Deserialize&lt;NotNan&lt;T&gt;, D&gt;
+    <span class="kw">impl</span>&lt;T: FloatCore, AT: Deserialize&lt;T, D&gt;, D: Fallible + <span class="question-mark">?</span>Sized&gt; Deserialize&lt;NotNan&lt;T&gt;, D&gt;
         <span class="kw">for </span>NotNan&lt;AT&gt;
     {
         <span class="kw">fn </span>deserialize(<span class="kw-2">&amp;</span><span class="self">self</span>, d: <span class="kw-2">&amp;mut </span>D) -&gt; <span class="prelude-ty">Result</span>&lt;NotNan&lt;T&gt;, D::Error&gt; {
@@ -4603,7 +5068,7 @@
         }
     }
 
-    <span class="macro">macro_rules! </span>rkyv_eq_ord {
+    <span class="macro">macro_rules!</span> rkyv_eq_ord {
         (<span class="macro-nonterminal">$main</span>:ident, <span class="macro-nonterminal">$float</span>:ty, <span class="macro-nonterminal">$rend</span>:ty) =&gt; {
             <span class="kw">impl </span>PartialEq&lt;<span class="macro-nonterminal">$main</span>&lt;<span class="macro-nonterminal">$float</span>&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$main</span>&lt;<span class="macro-nonterminal">$rend</span>&gt; {
                 <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="macro-nonterminal">$main</span>&lt;<span class="macro-nonterminal">$float</span>&gt;) -&gt; bool {
@@ -4634,38 +5099,38 @@
         };
     }
 
-    <span class="macro">rkyv_eq_ord! </span>{ OrderedFloat, f32, rkyv::rend::f32_le }
-    <span class="macro">rkyv_eq_ord! </span>{ OrderedFloat, f32, rkyv::rend::f32_be }
-    <span class="macro">rkyv_eq_ord! </span>{ OrderedFloat, f64, rkyv::rend::f64_le }
-    <span class="macro">rkyv_eq_ord! </span>{ OrderedFloat, f64, rkyv::rend::f64_be }
-    <span class="macro">rkyv_eq_ord! </span>{ NotNan, f32, rkyv::rend::f32_le }
-    <span class="macro">rkyv_eq_ord! </span>{ NotNan, f32, rkyv::rend::f32_be }
-    <span class="macro">rkyv_eq_ord! </span>{ NotNan, f64, rkyv::rend::f64_le }
-    <span class="macro">rkyv_eq_ord! </span>{ NotNan, f64, rkyv::rend::f64_be }
+    <span class="macro">rkyv_eq_ord!</span> { OrderedFloat, f32, rkyv::rend::f32_le }
+    <span class="macro">rkyv_eq_ord!</span> { OrderedFloat, f32, rkyv::rend::f32_be }
+    <span class="macro">rkyv_eq_ord!</span> { OrderedFloat, f64, rkyv::rend::f64_le }
+    <span class="macro">rkyv_eq_ord!</span> { OrderedFloat, f64, rkyv::rend::f64_be }
+    <span class="macro">rkyv_eq_ord!</span> { NotNan, f32, rkyv::rend::f32_le }
+    <span class="macro">rkyv_eq_ord!</span> { NotNan, f32, rkyv::rend::f32_be }
+    <span class="macro">rkyv_eq_ord!</span> { NotNan, f64, rkyv::rend::f64_le }
+    <span class="macro">rkyv_eq_ord!</span> { NotNan, f64, rkyv::rend::f64_be }
 
-    <span class="attr">#[cfg(feature = <span class="string">&quot;rkyv_ck&quot;</span>)]
+    <span class="attr">#[cfg(feature = <span class="string">"rkyv_ck"</span>)]
     </span><span class="kw">use </span><span class="kw">super</span>::FloatIsNan;
-    <span class="attr">#[cfg(feature = <span class="string">&quot;rkyv_ck&quot;</span>)]
+    <span class="attr">#[cfg(feature = <span class="string">"rkyv_ck"</span>)]
     </span><span class="kw">use </span>core::convert::Infallible;
-    <span class="attr">#[cfg(feature = <span class="string">&quot;rkyv_ck&quot;</span>)]
+    <span class="attr">#[cfg(feature = <span class="string">"rkyv_ck"</span>)]
     </span><span class="kw">use </span>rkyv::bytecheck::CheckBytes;
 
-    <span class="attr">#[cfg(feature = <span class="string">&quot;rkyv_ck&quot;</span>)]
-    </span><span class="kw">impl</span>&lt;C: <span class="question-mark">?</span>Sized, T: Float + CheckBytes&lt;C&gt;&gt; CheckBytes&lt;C&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
+    <span class="attr">#[cfg(feature = <span class="string">"rkyv_ck"</span>)]
+    </span><span class="kw">impl</span>&lt;C: <span class="question-mark">?</span>Sized, T: FloatCore + CheckBytes&lt;C&gt;&gt; CheckBytes&lt;C&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {
         <span class="kw">type </span>Error = Infallible;
 
         <span class="attr">#[inline]
-        </span><span class="kw">unsafe fn </span>check_bytes&lt;<span class="lifetime">&#39;a</span>&gt;(value: <span class="kw-2">*const </span><span class="self">Self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut </span>C) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
+        </span><span class="kw">unsafe fn </span>check_bytes&lt;<span class="lifetime">'a</span>&gt;(value: <span class="kw-2">*const </span><span class="self">Self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut </span>C) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
             <span class="prelude-val">Ok</span>(<span class="kw-2">&amp;*</span>value)
         }
     }
 
-    <span class="attr">#[cfg(feature = <span class="string">&quot;rkyv_ck&quot;</span>)]
-    </span><span class="kw">impl</span>&lt;C: <span class="question-mark">?</span>Sized, T: Float + CheckBytes&lt;C&gt;&gt; CheckBytes&lt;C&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
+    <span class="attr">#[cfg(feature = <span class="string">"rkyv_ck"</span>)]
+    </span><span class="kw">impl</span>&lt;C: <span class="question-mark">?</span>Sized, T: FloatCore + CheckBytes&lt;C&gt;&gt; CheckBytes&lt;C&gt; <span class="kw">for </span>NotNan&lt;T&gt; {
         <span class="kw">type </span>Error = FloatIsNan;
 
         <span class="attr">#[inline]
-        </span><span class="kw">unsafe fn </span>check_bytes&lt;<span class="lifetime">&#39;a</span>&gt;(value: <span class="kw-2">*const </span><span class="self">Self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut </span>C) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span><span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
+        </span><span class="kw">unsafe fn </span>check_bytes&lt;<span class="lifetime">'a</span>&gt;(value: <span class="kw-2">*const </span><span class="self">Self</span>, <span class="kw">_</span>: <span class="kw-2">&amp;mut </span>C) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="kw-2">&amp;</span><span class="lifetime">'a </span><span class="self">Self</span>, <span class="self">Self</span>::Error&gt; {
             <span class="self">Self</span>::new(<span class="kw-2">*</span>(value <span class="kw">as </span><span class="kw-2">*const </span>T)).map(|<span class="kw">_</span>| <span class="kw-2">&amp;*</span>value)
         }
     }
@@ -4676,7 +5141,7 @@
         <span class="kw">let </span><span class="kw-2">mut </span>serializer = DefaultSerializer::default();
         serializer
             .serialize_value(<span class="kw-2">&amp;</span>float)
-            .expect(<span class="string">&quot;failed to archive value&quot;</span>);
+            .expect(<span class="string">"failed to archive value"</span>);
         <span class="kw">let </span>len = serializer.pos();
         <span class="kw">let </span>buffer = serializer.into_serializer().into_inner();
 
@@ -4693,7 +5158,7 @@
         <span class="kw">let </span><span class="kw-2">mut </span>serializer = DefaultSerializer::default();
         serializer
             .serialize_value(<span class="kw-2">&amp;</span>float)
-            .expect(<span class="string">&quot;failed to archive value&quot;</span>);
+            .expect(<span class="string">"failed to archive value"</span>);
         <span class="kw">let </span>len = serializer.pos();
         <span class="kw">let </span>buffer = serializer.into_serializer().into_inner();
 
@@ -4705,10 +5170,10 @@
     }
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;speedy&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"speedy"</span>)]
 </span><span class="kw">mod </span>impl_speedy {
     <span class="kw">use super</span>::{NotNan, OrderedFloat};
-    <span class="kw">use </span>num_traits::Float;
+    <span class="kw">use </span>num_traits::float::FloatCore;
     <span class="kw">use </span>speedy::{Context, Readable, Reader, Writable, Writer};
 
     <span class="kw">impl</span>&lt;C, T&gt; Writable&lt;C&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
@@ -4739,11 +5204,11 @@
         }
     }
 
-    <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T, C: Context&gt; Readable&lt;<span class="lifetime">&#39;a</span>, C&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
+    <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T, C: Context&gt; Readable&lt;<span class="lifetime">'a</span>, C&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt;
     <span class="kw">where
-        </span>T: Readable&lt;<span class="lifetime">&#39;a</span>, C&gt;,
+        </span>T: Readable&lt;<span class="lifetime">'a</span>, C&gt;,
     {
-        <span class="kw">fn </span>read_from&lt;R: Reader&lt;<span class="lifetime">&#39;a</span>, C&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, C::Error&gt; {
+        <span class="kw">fn </span>read_from&lt;R: Reader&lt;<span class="lifetime">'a</span>, C&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, C::Error&gt; {
             T::read_from(reader).map(OrderedFloat)
         }
 
@@ -4752,14 +5217,14 @@
         }
     }
 
-    <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T: Float, C: Context&gt; Readable&lt;<span class="lifetime">&#39;a</span>, C&gt; <span class="kw">for </span>NotNan&lt;T&gt;
+    <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T: FloatCore, C: Context&gt; Readable&lt;<span class="lifetime">'a</span>, C&gt; <span class="kw">for </span>NotNan&lt;T&gt;
     <span class="kw">where
-        </span>T: Readable&lt;<span class="lifetime">&#39;a</span>, C&gt;,
+        </span>T: Readable&lt;<span class="lifetime">'a</span>, C&gt;,
     {
-        <span class="kw">fn </span>read_from&lt;R: Reader&lt;<span class="lifetime">&#39;a</span>, C&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, C::Error&gt; {
+        <span class="kw">fn </span>read_from&lt;R: Reader&lt;<span class="lifetime">'a</span>, C&gt;&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Result</span>&lt;<span class="self">Self</span>, C::Error&gt; {
             <span class="kw">let </span>value: T = reader.read_value()<span class="question-mark">?</span>;
             <span class="self">Self</span>::new(value).map_err(|error| {
-                speedy::Error::custom(<span class="macro">std::format!</span>(<span class="string">&quot;failed to read NotNan: {}&quot;</span>, error)).into()
+                speedy::Error::custom(<span class="macro">std::format!</span>(<span class="string">"failed to read NotNan: {}"</span>, error)).into()
             })
         }
 
@@ -4792,14 +5257,85 @@
     }
 }
 
-<span class="attr">#[cfg(all(feature = <span class="string">&quot;std&quot;</span>, feature = <span class="string">&quot;schemars&quot;</span>))]
+<span class="attr">#[cfg(feature = <span class="string">"borsh"</span>)]
+</span><span class="kw">mod </span>impl_borsh {
+    <span class="kw">extern crate </span>borsh;
+    <span class="kw">use super</span>::{NotNan, OrderedFloat};
+    <span class="kw">use </span>num_traits::float::FloatCore;
+
+    <span class="kw">impl</span>&lt;T&gt; borsh::BorshSerialize <span class="kw">for </span>OrderedFloat&lt;T&gt;
+    <span class="kw">where
+        </span>T: borsh::BorshSerialize,
+    {
+        <span class="attr">#[inline]
+        </span><span class="kw">fn </span>serialize&lt;W: borsh::io::Write&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; borsh::io::Result&lt;()&gt; {
+            &lt;T <span class="kw">as </span>borsh::BorshSerialize&gt;::serialize(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>, writer)
+        }
+    }
+
+    <span class="kw">impl</span>&lt;T&gt; borsh::BorshDeserialize <span class="kw">for </span>OrderedFloat&lt;T&gt;
+    <span class="kw">where
+        </span>T: borsh::BorshDeserialize,
+    {
+        <span class="attr">#[inline]
+        </span><span class="kw">fn </span>deserialize_reader&lt;R: borsh::io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; borsh::io::Result&lt;<span class="self">Self</span>&gt; {
+            &lt;T <span class="kw">as </span>borsh::BorshDeserialize&gt;::deserialize_reader(reader).map(<span class="self">Self</span>)
+        }
+    }
+
+    <span class="kw">impl</span>&lt;T&gt; borsh::BorshSerialize <span class="kw">for </span>NotNan&lt;T&gt;
+    <span class="kw">where
+        </span>T: borsh::BorshSerialize,
+    {
+        <span class="attr">#[inline]
+        </span><span class="kw">fn </span>serialize&lt;W: borsh::io::Write&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, writer: <span class="kw-2">&amp;mut </span>W) -&gt; borsh::io::Result&lt;()&gt; {
+            &lt;T <span class="kw">as </span>borsh::BorshSerialize&gt;::serialize(<span class="kw-2">&amp;</span><span class="self">self</span>.<span class="number">0</span>, writer)
+        }
+    }
+
+    <span class="kw">impl</span>&lt;T&gt; borsh::BorshDeserialize <span class="kw">for </span>NotNan&lt;T&gt;
+    <span class="kw">where
+        </span>T: FloatCore + borsh::BorshDeserialize,
+    {
+        <span class="attr">#[inline]
+        </span><span class="kw">fn </span>deserialize_reader&lt;R: borsh::io::Read&gt;(reader: <span class="kw-2">&amp;mut </span>R) -&gt; borsh::io::Result&lt;<span class="self">Self</span>&gt; {
+            <span class="kw">let </span>float = &lt;T <span class="kw">as </span>borsh::BorshDeserialize&gt;::deserialize_reader(reader)<span class="question-mark">?</span>;
+            NotNan::new(float).map_err(|<span class="kw">_</span>| {
+                borsh::io::Error::new(
+                    borsh::io::ErrorKind::InvalidData,
+                    <span class="string">"expected a non-NaN float"</span>,
+                )
+            })
+        }
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>test_ordered_float() {
+        <span class="kw">let </span>float = <span class="kw">crate</span>::OrderedFloat(<span class="number">1.0f64</span>);
+        <span class="kw">let </span>buffer = borsh::to_vec(<span class="kw-2">&amp;</span>float).expect(<span class="string">"failed to serialize value"</span>);
+        <span class="kw">let </span>deser_float: <span class="kw">crate</span>::OrderedFloat&lt;f64&gt; =
+            borsh::from_slice(<span class="kw-2">&amp;</span>buffer).expect(<span class="string">"failed to deserialize value"</span>);
+        <span class="macro">assert_eq!</span>(deser_float, float);
+    }
+
+    <span class="attr">#[test]
+    </span><span class="kw">fn </span>test_not_nan() {
+        <span class="kw">let </span>float = <span class="kw">crate</span>::NotNan(<span class="number">1.0f64</span>);
+        <span class="kw">let </span>buffer = borsh::to_vec(<span class="kw-2">&amp;</span>float).expect(<span class="string">"failed to serialize value"</span>);
+        <span class="kw">let </span>deser_float: <span class="kw">crate</span>::NotNan&lt;f64&gt; =
+            borsh::from_slice(<span class="kw-2">&amp;</span>buffer).expect(<span class="string">"failed to deserialize value"</span>);
+        <span class="macro">assert_eq!</span>(deser_float, float);
+    }
+}
+
+<span class="attr">#[cfg(all(feature = <span class="string">"std"</span>, feature = <span class="string">"schemars"</span>))]
 </span><span class="kw">mod </span>impl_schemars {
     <span class="kw">extern crate </span>schemars;
     <span class="kw">use </span><span class="self">self</span>::schemars::gen::SchemaGenerator;
     <span class="kw">use </span><span class="self">self</span>::schemars::schema::{InstanceType, Schema, SchemaObject};
     <span class="kw">use super</span>::{NotNan, OrderedFloat};
 
-    <span class="macro">macro_rules! </span>primitive_float_impl {
+    <span class="macro">macro_rules!</span> primitive_float_impl {
         (<span class="macro-nonterminal">$</span><span class="kw">type</span>:<span class="macro-nonterminal">ty</span>, <span class="macro-nonterminal">$schema_name</span>:literal) =&gt; {
             <span class="kw">impl </span>schemars::JsonSchema <span class="kw">for </span><span class="macro-nonterminal">$</span><span class="kw">type </span>{
                 <span class="kw">fn </span><span class="macro-nonterminal">is_referenceable</span>() -&gt; bool {
@@ -4822,10 +5358,10 @@
         };
     }
 
-    <span class="macro">primitive_float_impl!</span>(OrderedFloat&lt;f32&gt;, <span class="string">&quot;float&quot;</span>);
-    <span class="macro">primitive_float_impl!</span>(OrderedFloat&lt;f64&gt;, <span class="string">&quot;double&quot;</span>);
-    <span class="macro">primitive_float_impl!</span>(NotNan&lt;f32&gt;, <span class="string">&quot;float&quot;</span>);
-    <span class="macro">primitive_float_impl!</span>(NotNan&lt;f64&gt;, <span class="string">&quot;double&quot;</span>);
+    <span class="macro">primitive_float_impl!</span>(OrderedFloat&lt;f32&gt;, <span class="string">"float"</span>);
+    <span class="macro">primitive_float_impl!</span>(OrderedFloat&lt;f64&gt;, <span class="string">"double"</span>);
+    <span class="macro">primitive_float_impl!</span>(NotNan&lt;f32&gt;, <span class="string">"float"</span>);
+    <span class="macro">primitive_float_impl!</span>(NotNan&lt;f64&gt;, <span class="string">"double"</span>);
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>schema_generation_does_not_panic_for_common_floats() {
@@ -4840,7 +5376,7 @@
             );
             <span class="macro">assert_eq!</span>(
                 schema.schema.metadata.unwrap().title.unwrap(),
-                std::string::String::from(<span class="string">&quot;float&quot;</span>)
+                std::string::String::from(<span class="string">"float"</span>)
             );
         }
         {
@@ -4854,7 +5390,7 @@
             );
             <span class="macro">assert_eq!</span>(
                 schema.schema.metadata.unwrap().title.unwrap(),
-                std::string::String::from(<span class="string">&quot;double&quot;</span>)
+                std::string::String::from(<span class="string">"double"</span>)
             );
         }
         {
@@ -4868,7 +5404,7 @@
             );
             <span class="macro">assert_eq!</span>(
                 schema.schema.metadata.unwrap().title.unwrap(),
-                std::string::String::from(<span class="string">&quot;float&quot;</span>)
+                std::string::String::from(<span class="string">"float"</span>)
             );
         }
         {
@@ -4882,7 +5418,7 @@
             );
             <span class="macro">assert_eq!</span>(
                 schema.schema.metadata.unwrap().title.unwrap(),
-                std::string::String::from(<span class="string">&quot;double&quot;</span>)
+                std::string::String::from(<span class="string">"double"</span>)
             );
         }
     }
@@ -4919,20 +5455,20 @@
     }
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;rand&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"rand"</span>)]
 </span><span class="kw">mod </span>impl_rand {
     <span class="kw">use super</span>::{NotNan, OrderedFloat};
     <span class="kw">use </span>rand::distributions::uniform::<span class="kw-2">*</span>;
     <span class="kw">use </span>rand::distributions::{Distribution, Open01, OpenClosed01, Standard};
     <span class="kw">use </span>rand::Rng;
 
-    <span class="macro">macro_rules! </span>impl_distribution {
+    <span class="macro">macro_rules!</span> impl_distribution {
         (<span class="macro-nonterminal">$dist</span>:ident, $(<span class="macro-nonterminal">$f</span>:ty),+) =&gt; {
             $(
             <span class="kw">impl </span>Distribution&lt;NotNan&lt;<span class="macro-nonterminal">$f</span>&gt;&gt; <span class="kw">for </span><span class="macro-nonterminal">$dist </span>{
                 <span class="kw">fn </span>sample&lt;R: Rng + <span class="question-mark">?</span>Sized&gt;(<span class="kw-2">&amp;</span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R) -&gt; NotNan&lt;<span class="macro-nonterminal">$f</span>&gt; {
-                    <span class="comment">// &#39;rand&#39; never generates NaN values in the Standard, Open01, or
-                    // OpenClosed01 distributions. Using &#39;new_unchecked&#39; is therefore
+                    <span class="comment">// 'rand' never generates NaN values in the Standard, Open01, or
+                    // OpenClosed01 distributions. Using 'new_unchecked' is therefore
                     // safe.
                     </span><span class="kw">unsafe </span>{ NotNan::new_unchecked(<span class="self">self</span>.sample(rng)) }
                 }
@@ -4947,13 +5483,13 @@
         }
     }
 
-    <span class="macro">impl_distribution! </span>{ Standard, f32, f64 }
-    <span class="macro">impl_distribution! </span>{ Open01, f32, f64 }
-    <span class="macro">impl_distribution! </span>{ OpenClosed01, f32, f64 }
+    <span class="macro">impl_distribution!</span> { Standard, f32, f64 }
+    <span class="macro">impl_distribution!</span> { Open01, f32, f64 }
+    <span class="macro">impl_distribution!</span> { OpenClosed01, f32, f64 }
 
     <span class="doccomment">/// A sampler for a uniform distribution
-    </span><span class="attr">#[derive(Clone, Copy, Debug, PartialEq)]
-    #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Serialize, serde::Deserialize))]
+    </span><span class="attr">#[derive(Clone, Copy, Debug)]
+    #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
     </span><span class="kw">pub struct </span>UniformNotNan&lt;T&gt;(UniformFloat&lt;T&gt;);
     <span class="kw">impl </span>SampleUniform <span class="kw">for </span>NotNan&lt;f32&gt; {
         <span class="kw">type </span>Sampler = UniformNotNan&lt;f32&gt;;
@@ -4961,10 +5497,18 @@
     <span class="kw">impl </span>SampleUniform <span class="kw">for </span>NotNan&lt;f64&gt; {
         <span class="kw">type </span>Sampler = UniformNotNan&lt;f64&gt;;
     }
+    <span class="kw">impl</span>&lt;T&gt; PartialEq <span class="kw">for </span>UniformNotNan&lt;T&gt;
+    <span class="kw">where
+        </span>UniformFloat&lt;T&gt;: PartialEq,
+    {
+        <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+            <span class="self">self</span>.<span class="number">0 </span>== other.<span class="number">0
+        </span>}
+    }
 
     <span class="doccomment">/// A sampler for a uniform distribution
-    </span><span class="attr">#[derive(Clone, Copy, Debug, PartialEq)]
-    #[cfg_attr(feature = <span class="string">&quot;serde&quot;</span>, derive(serde::Serialize, serde::Deserialize))]
+    </span><span class="attr">#[derive(Clone, Copy, Debug)]
+    #[cfg_attr(feature = <span class="string">"serde"</span>, derive(serde::Serialize, serde::Deserialize))]
     </span><span class="kw">pub struct </span>UniformOrdered&lt;T&gt;(UniformFloat&lt;T&gt;);
     <span class="kw">impl </span>SampleUniform <span class="kw">for </span>OrderedFloat&lt;f32&gt; {
         <span class="kw">type </span>Sampler = UniformOrdered&lt;f32&gt;;
@@ -4972,8 +5516,16 @@
     <span class="kw">impl </span>SampleUniform <span class="kw">for </span>OrderedFloat&lt;f64&gt; {
         <span class="kw">type </span>Sampler = UniformOrdered&lt;f64&gt;;
     }
+    <span class="kw">impl</span>&lt;T&gt; PartialEq <span class="kw">for </span>UniformOrdered&lt;T&gt;
+    <span class="kw">where
+        </span>UniformFloat&lt;T&gt;: PartialEq,
+    {
+        <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span><span class="self">Self</span>) -&gt; bool {
+            <span class="self">self</span>.<span class="number">0 </span>== other.<span class="number">0
+        </span>}
+    }
 
-    <span class="macro">macro_rules! </span>impl_uniform_sampler {
+    <span class="macro">macro_rules!</span> impl_uniform_sampler {
         (<span class="macro-nonterminal">$f</span>:ty) =&gt; {
             <span class="kw">impl </span>UniformSampler <span class="kw">for </span>UniformNotNan&lt;<span class="macro-nonterminal">$f</span>&gt; {
                 <span class="kw">type </span>X = NotNan&lt;<span class="macro-nonterminal">$f</span>&gt;;
@@ -5020,10 +5572,10 @@
         };
     }
 
-    <span class="macro">impl_uniform_sampler! </span>{ f32 }
-    <span class="macro">impl_uniform_sampler! </span>{ f64 }
+    <span class="macro">impl_uniform_sampler!</span> { f32 }
+    <span class="macro">impl_uniform_sampler!</span> { f64 }
 
-    <span class="attr">#[cfg(all(test, feature = <span class="string">&quot;randtest&quot;</span>))]
+    <span class="attr">#[cfg(all(test, feature = <span class="string">"randtest"</span>))]
     </span><span class="kw">mod </span>tests {
         <span class="kw">use super</span>::<span class="kw-2">*</span>;
 
@@ -5064,7 +5616,7 @@
         </span><span class="kw">fn </span>uniform_sampling_panic_on_infinity_notnan() {
             <span class="kw">let </span>(low, high) = (
                 NotNan::new(<span class="number">0f64</span>).unwrap(),
-                NotNan::new(core::f64::INFINITY).unwrap(),
+                NotNan::new(f64::INFINITY).unwrap(),
             );
             <span class="kw">let </span>uniform = Uniform::new(low, high);
             <span class="kw">let _ </span>= uniform.sample(<span class="kw-2">&amp;mut </span>rand::thread_rng());
@@ -5073,7 +5625,7 @@
         <span class="attr">#[test]
         #[should_panic]
         </span><span class="kw">fn </span>uniform_sampling_panic_on_infinity_ordered() {
-            <span class="kw">let </span>(low, high) = (OrderedFloat(<span class="number">0f64</span>), OrderedFloat(core::f64::INFINITY));
+            <span class="kw">let </span>(low, high) = (OrderedFloat(<span class="number">0f64</span>), OrderedFloat(f64::INFINITY));
             <span class="kw">let </span>uniform = Uniform::new(low, high);
             <span class="kw">let _ </span>= uniform.sample(<span class="kw-2">&amp;mut </span>rand::thread_rng());
         }
@@ -5081,14 +5633,14 @@
         <span class="attr">#[test]
         #[should_panic]
         </span><span class="kw">fn </span>uniform_sampling_panic_on_nan_ordered() {
-            <span class="kw">let </span>(low, high) = (OrderedFloat(<span class="number">0f64</span>), OrderedFloat(core::f64::NAN));
+            <span class="kw">let </span>(low, high) = (OrderedFloat(<span class="number">0f64</span>), OrderedFloat(f64::NAN));
             <span class="kw">let </span>uniform = Uniform::new(low, high);
             <span class="kw">let _ </span>= uniform.sample(<span class="kw-2">&amp;mut </span>rand::thread_rng());
         }
     }
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;proptest&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"proptest"</span>)]
 </span><span class="kw">mod </span>impl_proptest {
     <span class="kw">use super</span>::{NotNan, OrderedFloat};
     <span class="kw">use </span>proptest::arbitrary::{Arbitrary, StrategyFor};
@@ -5096,7 +5648,7 @@
     <span class="kw">use </span>proptest::strategy::{FilterMap, Map, Strategy};
     <span class="kw">use </span>std::convert::TryFrom;
 
-    <span class="macro">macro_rules! </span>impl_arbitrary {
+    <span class="macro">macro_rules!</span> impl_arbitrary {
         ($(<span class="macro-nonterminal">$f</span>:ident),+) =&gt; {
             $(
                 <span class="kw">impl </span>Arbitrary <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$f</span>&gt; {
@@ -5104,7 +5656,7 @@
                     <span class="kw">type </span>Parameters = &lt;<span class="macro-nonterminal">$f </span><span class="kw">as </span>Arbitrary&gt;::Parameters;
                     <span class="kw">fn </span>arbitrary_with(params: <span class="self">Self</span>::Parameters) -&gt; <span class="self">Self</span>::Strategy {
                         &lt;<span class="macro-nonterminal">$f</span>&gt;::arbitrary_with(params)
-                            .prop_filter_map(<span class="string">&quot;filter nan values&quot;</span>, |f| NotNan::try_from(f).ok())
+                            .prop_filter_map(<span class="string">"filter nan values"</span>, |f| NotNan::try_from(f).ok())
                     }
                 }
 
@@ -5118,20 +5670,20 @@
             )*
         }
     }
-    <span class="macro">impl_arbitrary! </span>{ f32, f64 }
+    <span class="macro">impl_arbitrary!</span> { f32, f64 }
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;arbitrary&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"arbitrary"</span>)]
 </span><span class="kw">mod </span>impl_arbitrary {
     <span class="kw">use super</span>::{FloatIsNan, NotNan, OrderedFloat};
     <span class="kw">use </span>arbitrary::{Arbitrary, Unstructured};
     <span class="kw">use </span>num_traits::FromPrimitive;
 
-    <span class="macro">macro_rules! </span>impl_arbitrary {
+    <span class="macro">macro_rules!</span> impl_arbitrary {
         ($(<span class="macro-nonterminal">$f</span>:ident),+) =&gt; {
             $(
-                <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$f</span>&gt; {
-                    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>Unstructured&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt; {
+                <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Arbitrary&lt;<span class="lifetime">'a</span>&gt; <span class="kw">for </span>NotNan&lt;<span class="macro-nonterminal">$f</span>&gt; {
+                    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>Unstructured&lt;<span class="lifetime">'a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt; {
                         <span class="kw">let </span>float: <span class="macro-nonterminal">$f </span>= u.arbitrary()<span class="question-mark">?</span>;
                         <span class="kw">match </span>NotNan::new(float) {
                             <span class="prelude-val">Ok</span>(notnan_value) =&gt; <span class="prelude-val">Ok</span>(notnan_value),
@@ -5147,11 +5699,11 @@
                                 // An alternative implementation would be to return an
                                 // `arbitrary::Error`, but that is not as useful since it forces the
                                 // caller to retry with new random/fuzzed data; and the precendent of
-                                // `arbitrary`&#39;s built-in implementations is to prefer the approach of
+                                // `arbitrary`'s built-in implementations is to prefer the approach of
                                 // mangling the input bits to fit.
 
                                 </span><span class="kw">let </span>(mantissa, _exponent, sign) =
-                                    num_traits::Float::integer_decode(float);
+                                    num_traits::float::FloatCore::integer_decode(float);
                                 <span class="kw">let </span>revised_float = &lt;<span class="macro-nonterminal">$f</span>&gt;::from_i64(
                                     i64::from(sign) * mantissa <span class="kw">as </span>i64
                                 ).unwrap();
@@ -5167,8 +5719,8 @@
                     }
                 }
 
-                <span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>&gt; Arbitrary&lt;<span class="lifetime">&#39;a</span>&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$f</span>&gt; {
-                    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>Unstructured&lt;<span class="lifetime">&#39;a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt; {
+                <span class="kw">impl</span>&lt;<span class="lifetime">'a</span>&gt; Arbitrary&lt;<span class="lifetime">'a</span>&gt; <span class="kw">for </span>OrderedFloat&lt;<span class="macro-nonterminal">$f</span>&gt; {
+                    <span class="kw">fn </span>arbitrary(u: <span class="kw-2">&amp;mut </span>Unstructured&lt;<span class="lifetime">'a</span>&gt;) -&gt; arbitrary::Result&lt;<span class="self">Self</span>&gt; {
                         <span class="kw">let </span>float: <span class="macro-nonterminal">$f </span>= u.arbitrary()<span class="question-mark">?</span>;
                         <span class="prelude-val">Ok</span>(OrderedFloat::from(float))
                     }
@@ -5180,13 +5732,13 @@
             )*
         }
     }
-    <span class="macro">impl_arbitrary! </span>{ f32, f64 }
+    <span class="macro">impl_arbitrary!</span> { f32, f64 }
 }
 
-<span class="attr">#[cfg(feature = <span class="string">&quot;bytemuck&quot;</span>)]
+<span class="attr">#[cfg(feature = <span class="string">"bytemuck"</span>)]
 </span><span class="kw">mod </span>impl_bytemuck {
-    <span class="kw">use super</span>::{Float, NotNan, OrderedFloat};
-    <span class="kw">use </span>bytemuck::{AnyBitPattern, CheckedBitPattern, NoUninit, Pod, Zeroable};
+    <span class="kw">use super</span>::{FloatCore, NotNan, OrderedFloat};
+    <span class="kw">use </span>bytemuck::{AnyBitPattern, CheckedBitPattern, NoUninit, Pod, TransparentWrapper, Zeroable};
 
     <span class="kw">unsafe impl</span>&lt;T: Zeroable&gt; Zeroable <span class="kw">for </span>OrderedFloat&lt;T&gt; {}
 
@@ -5200,13 +5752,17 @@
     // from the value, which is fine in this case.
     </span><span class="kw">unsafe impl</span>&lt;T: NoUninit&gt; NoUninit <span class="kw">for </span>NotNan&lt;T&gt; {}
 
-    <span class="kw">unsafe impl</span>&lt;T: Float + AnyBitPattern&gt; CheckedBitPattern <span class="kw">for </span>NotNan&lt;T&gt; {
+    <span class="kw">unsafe impl</span>&lt;T: FloatCore + AnyBitPattern&gt; CheckedBitPattern <span class="kw">for </span>NotNan&lt;T&gt; {
         <span class="kw">type </span>Bits = T;
 
         <span class="kw">fn </span>is_valid_bit_pattern(bits: <span class="kw-2">&amp;</span><span class="self">Self</span>::Bits) -&gt; bool {
             !bits.is_nan()
         }
     }
+
+    <span class="comment">// OrderedFloat allows any value of the contained type, so it is a TransparentWrapper.
+    // NotNan does not, so it is not.
+    </span><span class="kw">unsafe impl</span>&lt;T&gt; TransparentWrapper&lt;T&gt; <span class="kw">for </span>OrderedFloat&lt;T&gt; {}
 
     <span class="attr">#[test]
     </span><span class="kw">fn </span>test_not_nan_bit_pattern() {

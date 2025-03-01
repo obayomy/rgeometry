@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/algorithms/triangulation/earclip.rs`."><title>earclip.rs - source</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceSerif4-Bold-a2c9cd1067f8b328.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../../../../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-fa3bb1812debf86c.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="rgeometry" data-themes="" data-resource-suffix="" data-rustdoc-version="1.74.0 (79e9716c9 2023-11-13)" data-channel="1.74.0" data-search-js="search-8be46b629f5f14a8.js" data-settings-js="settings-74424d7eec62a23e.js" ><script src="../../../../static.files/storage-fec3eaa3851e447d.js"></script><script defer src="../../../../static.files/src-script-3280b574d94e47b4.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-c5bd66d33317d69f.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-5d8b3c7633ad77ba.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-2c020d218678b618.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Source of the Rust file `src/algorithms/triangulation/earclip.rs`."><title>earclip.rs - source</title><script>if(window.location.protocol!=="file:")document.head.insertAdjacentHTML("beforeend","SourceSerif4-Regular-6b053e98.ttf.woff2,FiraSans-Regular-0fe48ade.woff2,FiraSans-Medium-e1aa3f0a.woff2,SourceCodePro-Regular-8badfe75.ttf.woff2,SourceCodePro-Semibold-aa29a496.ttf.woff2".split(",").map(f=>`<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../../static.files/${f}">`).join(""))</script><link rel="stylesheet" href="../../../../static.files/normalize-9960930a.css"><link rel="stylesheet" href="../../../../static.files/rustdoc-46132b98.css"><meta name="rustdoc-vars" data-root-path="../../../../" data-static-root-path="../../../../static.files/" data-current-crate="rgeometry" data-themes="" data-resource-suffix="" data-rustdoc-version="1.85.0 (4d91de4e4 2025-02-17)" data-channel="1.85.0" data-search-js="search-75f5ac3e.js" data-settings-js="settings-0f613d39.js" ><script src="../../../../static.files/storage-59e33391.js"></script><script defer src="../../../../static.files/src-script-56102188.js"></script><script defer src="../../../../src-files.js"></script><script defer src="../../../../static.files/main-5f194d8c.js"></script><noscript><link rel="stylesheet" href="../../../../static.files/noscript-893ab5e7.css"></noscript><link rel="alternate icon" type="image/png" href="../../../../static.files/favicon-32x32-6580c154.png"><link rel="icon" type="image/svg+xml" href="../../../../static.files/favicon-044be391.svg"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.js"                  integrity="sha384-K3vbOmF2BtaVai+Qk37uypf7VrgBubhQreNQe9aGsz9lB63dIFiQVlJbr92dw2Lx" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/contrib/auto-render.min.js"    integrity="sha384-kmZOZB5ObwgQnS/DuDg6TScgOiWWBiVt0plIRkZCmE6rDZGrEOQeHM5PcHi+nyqe" crossorigin="anonymous"></script>
 <script>
@@ -19,7 +19,8 @@
   }
 </style>
 
-</head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"></nav><main><nav class="sub"><a class="sub-logo-container" href="../../../../rgeometry/index.html"><img class="rust-logo" src="../../../../static.files/rust-logo-151179464ae7ed46.svg" alt="logo"></a><form class="search-form"><span></span><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" title="help" tabindex="-1"><a href="../../../../help.html">?</a></div><div id="settings-menu" tabindex="-1"><a href="../../../../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../../../../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers"><a href="#1" id="1">1</a>
+</head><body class="rustdoc src"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="sidebar"><div class="src-sidebar-title"><h2>Files</h2></div></nav><div class="sidebar-resizer"></div><main><rustdoc-search></rustdoc-search><section id="main-content" class="content"><div class="main-heading"><h1><div class="sub-heading">rgeometry/algorithms/triangulation/</div>earclip.rs</h1><rustdoc-toolbar></rustdoc-toolbar></div><div class="example-wrap"><div data-nosnippet><pre class="src-line-numbers">
+<a href="#1" id="1">1</a>
 <a href="#2" id="2">2</a>
 <a href="#3" id="3">3</a>
 <a href="#4" id="4">4</a>
@@ -569,14 +570,7 @@
 <a href="#548" id="548">548</a>
 <a href="#549" id="549">549</a>
 <a href="#550" id="550">550</a>
-<a href="#551" id="551">551</a>
-<a href="#552" id="552">552</a>
-<a href="#553" id="553">553</a>
-<a href="#554" id="554">554</a>
-<a href="#555" id="555">555</a>
-<a href="#556" id="556">556</a>
-<a href="#557" id="557">557</a>
-</pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::algorithms::zhash::{ZHashBox, ZHashable};
+<a href="#551" id="551">551</a></pre></div><pre class="rust"><code><span class="kw">use </span><span class="kw">crate</span>::algorithms::zhash::{ZHashBox, ZHashable};
 <span class="kw">use </span><span class="kw">crate</span>::data::{Point, PointId, PointLocation, Polygon, TriangleView};
 <span class="kw">use </span><span class="kw">crate</span>::Orientation;
 <span class="kw">use </span><span class="kw">crate</span>::PolygonScalar;
@@ -587,7 +581,7 @@
 <span class="kw">use </span>rand::SeedableRng;
 
 <span class="doccomment">/// $O(n^2)$ Polygon triangulation. Ears are selected in a pseudo-random manner.
-</span><span class="kw">pub fn </span>earclip&lt;T&gt;(poly: <span class="kw-2">&amp;</span>Polygon&lt;T&gt;) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">&#39;_
+</span><span class="kw">pub fn </span>earclip&lt;T&gt;(poly: <span class="kw-2">&amp;</span>Polygon&lt;T&gt;) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">'_
 </span><span class="kw">where
   </span>T: PolygonScalar,
 {
@@ -603,7 +597,7 @@
 /// $O(n^2)$ worst case complexity. Expected time is linear.
 </span><span class="kw">pub fn </span>earclip_hashed&lt;T&gt;(
   poly: <span class="kw-2">&amp;</span>Polygon&lt;T&gt;,
-) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">&#39;_
+) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">'_
 </span><span class="kw">where
   </span>T: PolygonScalar + ZHashable,
 {
@@ -625,16 +619,16 @@
 //   Delete it from the list of possible-ears.
 //   If it is:
 //     Delete it from the vertex list.
-//     Insert vertex-&gt;prev and vertex-&gt;next into possible-ears if they aren&#39;t there already.
+//     Insert vertex-&gt;prev and vertex-&gt;next into possible-ears if they aren't there already.
 //     Emit an edge: (vertex.prev, ear, vertex.next)
-</span><span class="kw">pub fn </span>triangulate_list&lt;<span class="lifetime">&#39;a</span>, T, R&gt;(
-  points: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Point&lt;T&gt;],
-  order: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PointId],
+</span><span class="kw">pub fn </span>triangulate_list&lt;<span class="lifetime">'a</span>, T, R&gt;(
+  points: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[Point&lt;T&gt;],
+  order: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[PointId],
   <span class="kw-2">mut </span>rng: R,
-) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">&#39;a
+) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">'a
 </span><span class="kw">where
   </span>T: PolygonScalar,
-  R: Rng + <span class="lifetime">&#39;static</span>,
+  R: Rng + <span class="lifetime">'static</span>,
 {
   <span class="kw">let </span><span class="kw-2">mut </span>len = order.len();
   <span class="kw">let </span><span class="kw-2">mut </span>vertices = List::new(points, order);
@@ -658,7 +652,7 @@
   })
 }
 
-<span class="kw">fn </span>is_ear&lt;T&gt;(a: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;, b: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;, c: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;) -&gt; bool
+<span class="kw">fn </span>is_ear&lt;T&gt;(a: Cursor&lt;<span class="lifetime">'_</span>, T&gt;, b: Cursor&lt;<span class="lifetime">'_</span>, T&gt;, c: Cursor&lt;<span class="lifetime">'_</span>, T&gt;) -&gt; bool
 <span class="kw">where
   </span>T: PolygonScalar,
 {
@@ -680,14 +674,14 @@
 <span class="comment">///////////////////////////////////////////////////////////////////////////////
 // Z-order hash ear clipping
 
-</span><span class="kw">pub fn </span>triangulate_list_hashed&lt;<span class="lifetime">&#39;a</span>, T, R&gt;(
-  points: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Point&lt;T&gt;],
-  order: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PointId],
+</span><span class="kw">pub fn </span>triangulate_list_hashed&lt;<span class="lifetime">'a</span>, T, R&gt;(
+  points: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[Point&lt;T&gt;],
+  order: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[PointId],
   <span class="kw-2">mut </span>rng: R,
-) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">&#39;a
+) -&gt; <span class="kw">impl </span>Iterator&lt;Item = (PointId, PointId, PointId)&gt; + <span class="lifetime">'a
 </span><span class="kw">where
   </span>T: PolygonScalar + ZHashable,
-  R: Rng + <span class="lifetime">&#39;static</span>,
+  R: Rng + <span class="lifetime">'static</span>,
 {
   <span class="kw">let </span><span class="kw-2">mut </span>len = order.len();
   <span class="kw">let </span><span class="kw-2">mut </span>vertices = List::new(points, order);
@@ -725,15 +719,12 @@
   })
 }
 
-<span class="kw">fn </span>is_ear_hashed&lt;T: ZHashable&gt;(
+<span class="kw">fn </span>is_ear_hashed&lt;T: PolygonScalar + ZHashable&gt;(
   key: &lt;T <span class="kw">as </span>ZHashable&gt;::ZHashKey,
-  a: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;,
-  b: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;,
-  c: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;,
-) -&gt; bool
-<span class="kw">where
-  </span>T: PolygonScalar,
-{
+  a: Cursor&lt;<span class="lifetime">'_</span>, T&gt;,
+  b: Cursor&lt;<span class="lifetime">'_</span>, T&gt;,
+  c: Cursor&lt;<span class="lifetime">'_</span>, T&gt;,
+) -&gt; bool {
   <span class="kw">let </span>trig = TriangleView::new_unchecked([a.point(), b.point(), c.point()]);
   <span class="kw">if </span>trig.orientation() == Orientation::CounterClockWise {
     <span class="comment">// Points inside the triangle are guaranteed to have a zhash
@@ -747,8 +738,8 @@
     </span><span class="kw">let </span><span class="kw-2">mut </span>up_focus = b.next();
     <span class="kw">let </span><span class="kw-2">mut </span>down_focus = b.prev();
 
-    <span class="kw">let </span>cond = |cursor: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;| cursor.valid() &amp;&amp; cursor.between(min_hash, max_hash);
-    <span class="kw">let </span>check = |cursor: Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt;| {
+    <span class="kw">let </span>cond = |cursor: Cursor&lt;<span class="lifetime">'_</span>, T&gt;| cursor.valid() &amp;&amp; cursor.between(min_hash, max_hash);
+    <span class="kw">let </span>check = |cursor: Cursor&lt;<span class="lifetime">'_</span>, T&gt;| {
       cursor != a
         &amp;&amp; cursor != b
         &amp;&amp; cursor != c
@@ -785,12 +776,12 @@
   </span>}
 }
 
-<span class="kw">fn </span>zbox_slice&lt;<span class="lifetime">&#39;a</span>, T&gt;(slice: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Point&lt;T&gt;], order: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PointId]) -&gt; ZHashBox&lt;<span class="lifetime">&#39;a</span>, T&gt;
+<span class="kw">fn </span>zbox_slice&lt;<span class="lifetime">'a</span>, T&gt;(slice: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[Point&lt;T&gt;], order: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[PointId]) -&gt; ZHashBox&lt;<span class="lifetime">'a</span>, T&gt;
 <span class="kw">where
   </span>T: PolygonScalar + ZHashable,
 {
   <span class="kw">if </span>slice.is_empty() {
-    <span class="macro">panic!</span>(<span class="string">&quot;Cannot zhash an empty slice&quot;</span>);
+    <span class="macro">panic!</span>(<span class="string">"Cannot zhash an empty slice"</span>);
     <span class="comment">// return ZHashBox {
     //   min_x: &amp;T::zero(),
     //   max_x: &amp;T::zero(),
@@ -820,6 +811,216 @@
     }
   }
   zbox
+}
+
+<span class="comment">///////////////////////////////////////////////////////////////////////////////
+// Linked List that supports deletions and re-insertions (of deleted items)
+
+</span><span class="kw">struct </span>Cursor&lt;<span class="lifetime">'a</span>, T&gt; {
+  list: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>List&lt;<span class="lifetime">'a</span>, T&gt;,
+  position: usize,
+}
+
+<span class="kw">impl</span>&lt;T&gt; Eq <span class="kw">for </span>Cursor&lt;<span class="lifetime">'_</span>, T&gt; {}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; PartialEq <span class="kw">for </span>Cursor&lt;<span class="lifetime">'a</span>, T&gt; {
+  <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Cursor&lt;<span class="lifetime">'a</span>, T&gt;) -&gt; bool {
+    <span class="self">self</span>.position == other.position
+  }
+}
+
+<span class="kw">impl</span>&lt;T&gt; Copy <span class="kw">for </span>Cursor&lt;<span class="lifetime">'_</span>, T&gt; {}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; Clone <span class="kw">for </span>Cursor&lt;<span class="lifetime">'a</span>, T&gt; {
+  <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cursor&lt;<span class="lifetime">'a</span>, T&gt; {
+    <span class="kw-2">*</span><span class="self">self
+  </span>}
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; Cursor&lt;<span class="lifetime">'a</span>, T&gt; {
+  <span class="kw">fn </span>valid(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
+    <span class="self">self</span>.position != usize::MAX
+  }
+
+  <span class="kw">fn </span>next(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; Cursor&lt;<span class="lifetime">'a</span>, T&gt; {
+    <span class="self">self</span>.position = <span class="self">self</span>.list.next(<span class="self">self</span>.position);
+    <span class="self">self
+  </span>}
+
+  <span class="kw">fn </span>prev(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; Cursor&lt;<span class="lifetime">'a</span>, T&gt; {
+    <span class="self">self</span>.position = <span class="self">self</span>.list.prev(<span class="self">self</span>.position);
+    <span class="self">self
+  </span>}
+
+  <span class="kw">fn </span>point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Point&lt;T&gt; {
+    <span class="self">self</span>.list.point(<span class="self">self</span>.position)
+  }
+
+  <span class="kw">fn </span>point_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PointId {
+    <span class="self">self</span>.list.point_id(<span class="self">self</span>.position)
+  }
+
+  <span class="kw">fn </span>hash(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u64 {
+    <span class="self">self</span>.list.hash(<span class="self">self</span>.position)
+  }
+
+  <span class="kw">fn </span>between(<span class="kw-2">&amp;</span><span class="self">self</span>, min: u64, max: u64) -&gt; bool {
+    <span class="self">self</span>.hash() &gt;= min &amp;&amp; <span class="self">self</span>.hash() &lt;= max
+  }
+}
+
+<span class="kw">struct </span>List&lt;<span class="lifetime">'a</span>, T&gt; {
+  points: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[Point&lt;T&gt;],
+  order: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[PointId],
+  hashes: Vec&lt;u64&gt;,
+  prev: Vec&lt;usize&gt;,
+  next: Vec&lt;usize&gt;,
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; List&lt;<span class="lifetime">'a</span>, T&gt; {
+  <span class="kw">fn </span>new(points: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[Point&lt;T&gt;], order: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[PointId]) -&gt; List&lt;<span class="lifetime">'a</span>, T&gt; {
+    <span class="kw">let </span>size = order.len();
+    <span class="kw">let </span><span class="kw-2">mut </span>prev = Vec::with_capacity(size);
+    <span class="kw">let </span><span class="kw-2">mut </span>next = Vec::with_capacity(size);
+    prev.resize(size, <span class="number">0</span>);
+    next.resize(size, <span class="number">0</span>);
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..size {
+      prev[(i + <span class="number">1</span>) % size] = i;
+      next[i] = (i + <span class="number">1</span>) % size;
+    }
+    List {
+      points,
+      order,
+      hashes: <span class="macro">vec!</span>[],
+      prev,
+      next,
+    }
+  }
+
+  <span class="kw">fn </span>prev(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; usize {
+    <span class="self">self</span>.prev[vertex]
+  }
+
+  <span class="kw">fn </span>next(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; usize {
+    <span class="self">self</span>.next[vertex]
+  }
+
+  <span class="kw">fn </span>delete(<span class="kw-2">&amp;mut </span><span class="self">self</span>, vertex: usize) {
+    <span class="kw">let </span>prev = <span class="self">self</span>.prev[vertex];
+    <span class="kw">let </span>next = <span class="self">self</span>.next[vertex];
+    <span class="kw">if </span>prev != usize::MAX {
+      <span class="self">self</span>.next[prev] = next;
+    }
+    <span class="kw">if </span>next != usize::MAX {
+      <span class="self">self</span>.prev[next] = prev;
+    }
+  }
+
+  <span class="kw">fn </span>cursor(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; Cursor&lt;<span class="lifetime">'_</span>, T&gt; {
+    Cursor {
+      list: <span class="self">self</span>,
+      position: vertex,
+    }
+  }
+
+  <span class="kw">fn </span>point(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; <span class="kw-2">&amp;</span>Point&lt;T&gt; {
+    <span class="kw-2">&amp;</span><span class="self">self</span>.points[<span class="self">self</span>.point_id(vertex).usize()]
+  }
+
+  <span class="kw">fn </span>point_id(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; PointId {
+    <span class="self">self</span>.order[vertex]
+  }
+
+  <span class="kw">fn </span>hash(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; u64 {
+    <span class="self">self</span>.hashes[vertex]
+  }
+}
+
+<span class="kw">impl</span>&lt;<span class="lifetime">'a</span>, T&gt; List&lt;<span class="lifetime">'a</span>, T&gt; {
+  <span class="kw">fn </span>new_sorted(points: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[Point&lt;T&gt;], order: <span class="kw-2">&amp;</span><span class="lifetime">'a </span>[PointId], keys: Vec&lt;u64&gt;) -&gt; List&lt;<span class="lifetime">'a</span>, T&gt; {
+    <span class="kw">let </span>size = keys.len();
+    <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;usize&gt; = (<span class="number">0</span>..size).collect();
+    v.sort_unstable_by_key(|<span class="kw-2">&amp;</span>idx| keys[idx]);
+    <span class="kw">let </span><span class="kw-2">mut </span>prev = Vec::with_capacity(size);
+    <span class="kw">let </span><span class="kw-2">mut </span>next = Vec::with_capacity(size);
+    prev.resize(size, <span class="number">0</span>);
+    next.resize(size, <span class="number">0</span>);
+    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..size {
+      prev[v[(i + <span class="number">1</span>) % size]] = v[i];
+      next[v[i]] = v[(i + <span class="number">1</span>) % size];
+    }
+    next[v[size - <span class="number">1</span>]] = usize::MAX;
+    prev[v[<span class="number">0</span>]] = usize::MAX;
+    List {
+      points,
+      order,
+      hashes: keys,
+      prev,
+      next,
+    }
+  }
+}
+
+<span class="comment">///////////////////////////////////////////////////////////////////////////////
+// Collection of possible ears.
+
+</span><span class="kw">struct </span>EarStore {
+  possible_ears_vec: Vec&lt;usize&gt;,
+  possible_ears_set: IntSet,
+}
+
+<span class="kw">impl </span>EarStore {
+  <span class="kw">fn </span>new(size: usize) -&gt; EarStore {
+    EarStore {
+      possible_ears_vec: (<span class="number">0</span>..size).collect(),
+      possible_ears_set: IntSet::with_capacity(size),
+    }
+  }
+
+  <span class="kw">fn </span>new_possible_ear(<span class="kw-2">&amp;mut </span><span class="self">self</span>, possible_ear: usize) {
+    <span class="kw">if </span>!<span class="self">self</span>.possible_ears_set.contains(possible_ear) {
+      <span class="self">self</span>.possible_ears_set.insert(possible_ear);
+      <span class="self">self</span>.possible_ears_vec.push(possible_ear);
+    }
+  }
+
+  <span class="kw">fn </span>pop&lt;R&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt;
+  <span class="kw">where
+    </span>R: Rng + <span class="question-mark">?</span>Sized,
+  {
+    <span class="kw">let </span>n = rng.gen_range(<span class="number">0</span>..<span class="self">self</span>.possible_ears_vec.len());
+    <span class="kw">let </span>next = <span class="self">self</span>.possible_ears_vec.swap_remove(n);
+    <span class="self">self</span>.possible_ears_set.delete(next);
+    <span class="prelude-val">Some</span>(next)
+  }
+}
+
+<span class="comment">///////////////////////////////////////////////////////////////////////////////
+// IntSet
+
+// FIXME: Use a bitset?
+</span><span class="kw">struct </span>IntSet {
+  set: Vec&lt;bool&gt;,
+}
+
+<span class="kw">impl </span>IntSet {
+  <span class="kw">fn </span>with_capacity(capacity: usize) -&gt; IntSet {
+    <span class="kw">let </span><span class="kw-2">mut </span>set = Vec::with_capacity(capacity);
+    set.resize(capacity, <span class="bool-val">true</span>);
+    IntSet { set }
+  }
+
+  <span class="kw">fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, value: usize) -&gt; bool {
+    <span class="self">self</span>.set[value]
+  }
+
+  <span class="kw">fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: usize) {
+    <span class="self">self</span>.set[value] = <span class="bool-val">true
+  </span>}
+
+  <span class="kw">fn </span>delete(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: usize) {
+    <span class="self">self</span>.set[value] = <span class="bool-val">false
+  </span>}
 }
 
 <span class="comment">///////////////////////////////////////////////////////////////////////////////
@@ -919,218 +1120,5 @@
       triangulate_list_hashed(<span class="kw-2">&amp;</span>poly.points, <span class="kw-2">&amp;</span>poly.rings[<span class="number">0</span>], rng).collect();
     <span class="macro">prop_assert_eq!</span>(not_hashed, hashed);
   }
-}
-
-<span class="comment">///////////////////////////////////////////////////////////////////////////////
-// Linked List that supports deletions and re-insertions (of deleted items)
-
-</span><span class="kw">struct </span>Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-  list: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>List&lt;<span class="lifetime">&#39;a</span>, T&gt;,
-  position: usize,
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; Eq <span class="kw">for </span>Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; PartialEq <span class="kw">for </span>Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-  <span class="kw">fn </span>eq(<span class="kw-2">&amp;</span><span class="self">self</span>, other: <span class="kw-2">&amp;</span>Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt;) -&gt; bool {
-    <span class="self">self</span>.position == other.position
-  }
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; Copy <span class="kw">for </span>Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; Clone <span class="kw">for </span>Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-  <span class="kw">fn </span>clone(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-    Cursor {
-      list: <span class="self">self</span>.list,
-      position: <span class="self">self</span>.position,
-    }
-  }
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-  <span class="kw">fn </span>valid(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; bool {
-    <span class="self">self</span>.position != usize::MAX
-  }
-
-  <span class="kw">fn </span>next(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-    <span class="self">self</span>.position = <span class="self">self</span>.list.next(<span class="self">self</span>.position);
-    <span class="self">self
-  </span>}
-
-  <span class="kw">fn </span>prev(<span class="kw-2">mut </span><span class="self">self</span>) -&gt; Cursor&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-    <span class="self">self</span>.position = <span class="self">self</span>.list.prev(<span class="self">self</span>.position);
-    <span class="self">self
-  </span>}
-
-  <span class="kw">fn </span>point(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; <span class="kw-2">&amp;</span>Point&lt;T&gt; {
-    <span class="self">self</span>.list.point(<span class="self">self</span>.position)
-  }
-
-  <span class="kw">fn </span>point_id(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; PointId {
-    <span class="self">self</span>.list.point_id(<span class="self">self</span>.position)
-  }
-
-  <span class="kw">fn </span>hash(<span class="kw-2">&amp;</span><span class="self">self</span>) -&gt; u64 {
-    <span class="self">self</span>.list.hash(<span class="self">self</span>.position)
-  }
-
-  <span class="kw">fn </span>between(<span class="kw-2">&amp;</span><span class="self">self</span>, min: u64, max: u64) -&gt; bool {
-    <span class="self">self</span>.hash() &gt;= min &amp;&amp; <span class="self">self</span>.hash() &lt;= max
-  }
-}
-
-<span class="kw">struct </span>List&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-  points: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Point&lt;T&gt;],
-  order: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PointId],
-  hashes: Vec&lt;u64&gt;,
-  prev: Vec&lt;usize&gt;,
-  next: Vec&lt;usize&gt;,
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; List&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-  <span class="kw">fn </span>new(points: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Point&lt;T&gt;], order: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PointId]) -&gt; List&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-    <span class="kw">let </span>size = order.len();
-    <span class="kw">let </span><span class="kw-2">mut </span>prev = Vec::with_capacity(size);
-    <span class="kw">let </span><span class="kw-2">mut </span>next = Vec::with_capacity(size);
-    prev.resize(size, <span class="number">0</span>);
-    next.resize(size, <span class="number">0</span>);
-    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..size {
-      prev[(i + <span class="number">1</span>) % size] = i;
-      next[i] = (i + <span class="number">1</span>) % size;
-    }
-    List {
-      points,
-      order,
-      hashes: <span class="macro">vec!</span>[],
-      prev,
-      next,
-    }
-  }
-
-  <span class="kw">fn </span>prev(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; usize {
-    <span class="self">self</span>.prev[vertex]
-  }
-
-  <span class="kw">fn </span>next(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; usize {
-    <span class="self">self</span>.next[vertex]
-  }
-
-  <span class="kw">fn </span>delete(<span class="kw-2">&amp;mut </span><span class="self">self</span>, vertex: usize) {
-    <span class="kw">let </span>prev = <span class="self">self</span>.prev[vertex];
-    <span class="kw">let </span>next = <span class="self">self</span>.next[vertex];
-    <span class="kw">if </span>prev != usize::MAX {
-      <span class="self">self</span>.next[prev] = next;
-    }
-    <span class="kw">if </span>next != usize::MAX {
-      <span class="self">self</span>.prev[next] = prev;
-    }
-  }
-
-  <span class="kw">fn </span>cursor(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; Cursor&lt;<span class="lifetime">&#39;_</span>, T&gt; {
-    Cursor {
-      list: <span class="self">self</span>,
-      position: vertex,
-    }
-  }
-
-  <span class="kw">fn </span>point(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; <span class="kw-2">&amp;</span>Point&lt;T&gt; {
-    <span class="kw-2">&amp;</span><span class="self">self</span>.points[<span class="self">self</span>.point_id(vertex).usize()]
-  }
-
-  <span class="kw">fn </span>point_id(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; PointId {
-    <span class="self">self</span>.order[vertex]
-  }
-
-  <span class="kw">fn </span>hash(<span class="kw-2">&amp;</span><span class="self">self</span>, vertex: usize) -&gt; u64 {
-    <span class="self">self</span>.hashes[vertex]
-  }
-}
-
-<span class="kw">impl</span>&lt;<span class="lifetime">&#39;a</span>, T&gt; List&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-  <span class="kw">fn </span>new_sorted(points: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[Point&lt;T&gt;], order: <span class="kw-2">&amp;</span><span class="lifetime">&#39;a </span>[PointId], keys: Vec&lt;u64&gt;) -&gt; List&lt;<span class="lifetime">&#39;a</span>, T&gt; {
-    <span class="kw">let </span>size = keys.len();
-    <span class="kw">let </span><span class="kw-2">mut </span>v: Vec&lt;usize&gt; = (<span class="number">0</span>..size).collect();
-    v.sort_unstable_by_key(|<span class="kw-2">&amp;</span>idx| keys[idx]);
-    <span class="kw">let </span><span class="kw-2">mut </span>prev = Vec::with_capacity(size);
-    <span class="kw">let </span><span class="kw-2">mut </span>next = Vec::with_capacity(size);
-    prev.resize(size, <span class="number">0</span>);
-    next.resize(size, <span class="number">0</span>);
-    <span class="kw">for </span>i <span class="kw">in </span><span class="number">0</span>..size {
-      prev[v[(i + <span class="number">1</span>) % size]] = v[i];
-      next[v[i]] = v[(i + <span class="number">1</span>) % size];
-    }
-    next[v[size - <span class="number">1</span>]] = usize::MAX;
-    prev[v[<span class="number">0</span>]] = usize::MAX;
-    List {
-      points,
-      order,
-      hashes: keys,
-      prev,
-      next,
-    }
-  }
-}
-
-<span class="comment">///////////////////////////////////////////////////////////////////////////////
-// Collection of possible ears.
-
-</span><span class="kw">struct </span>EarStore {
-  possible_ears_vec: Vec&lt;usize&gt;,
-  possible_ears_set: IntSet,
-}
-
-<span class="kw">impl </span>EarStore {
-  <span class="kw">fn </span>new(size: usize) -&gt; EarStore {
-    EarStore {
-      possible_ears_vec: (<span class="number">0</span>..size).collect(),
-      possible_ears_set: IntSet::with_capacity(size),
-    }
-  }
-
-  <span class="kw">fn </span>new_possible_ear(<span class="kw-2">&amp;mut </span><span class="self">self</span>, possible_ear: usize) {
-    <span class="kw">if </span>!<span class="self">self</span>.possible_ears_set.contains(possible_ear) {
-      <span class="self">self</span>.possible_ears_set.insert(possible_ear);
-      <span class="self">self</span>.possible_ears_vec.push(possible_ear);
-    }
-  }
-
-  <span class="kw">fn </span>pop&lt;R&gt;(<span class="kw-2">&amp;mut </span><span class="self">self</span>, rng: <span class="kw-2">&amp;mut </span>R) -&gt; <span class="prelude-ty">Option</span>&lt;usize&gt;
-  <span class="kw">where
-    </span>R: Rng + <span class="question-mark">?</span>Sized,
-  {
-    <span class="kw">let </span>n = rng.gen_range(<span class="number">0</span>..<span class="self">self</span>.possible_ears_vec.len());
-    <span class="kw">let </span>next = <span class="self">self</span>.possible_ears_vec.swap_remove(n);
-    <span class="self">self</span>.possible_ears_set.delete(next);
-    <span class="prelude-val">Some</span>(next)
-  }
-}
-
-<span class="comment">///////////////////////////////////////////////////////////////////////////////
-// IntSet
-
-// FIXME: Use a bitset?
-</span><span class="kw">struct </span>IntSet {
-  set: Vec&lt;bool&gt;,
-}
-
-<span class="kw">impl </span>IntSet {
-  <span class="kw">fn </span>with_capacity(capacity: usize) -&gt; IntSet {
-    <span class="kw">let </span><span class="kw-2">mut </span>set = Vec::with_capacity(capacity);
-    set.resize(capacity, <span class="bool-val">true</span>);
-    IntSet { set }
-  }
-
-  <span class="kw">fn </span>contains(<span class="kw-2">&amp;</span><span class="self">self</span>, value: usize) -&gt; bool {
-    <span class="self">self</span>.set[value]
-  }
-
-  <span class="kw">fn </span>insert(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: usize) {
-    <span class="self">self</span>.set[value] = <span class="bool-val">true
-  </span>}
-
-  <span class="kw">fn </span>delete(<span class="kw-2">&amp;mut </span><span class="self">self</span>, value: usize) {
-    <span class="self">self</span>.set[value] = <span class="bool-val">false
-  </span>}
 }
 </code></pre></div></section></main></body></html>
